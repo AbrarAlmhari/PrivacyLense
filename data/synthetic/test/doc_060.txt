@@ -1,0 +1,11 @@
+STUDENT REGISTRATION FORM
+
+Full name: Daniel Rossi
+National ID / Iqama: 1207748958
+Date of registration: 2026-01-07
+Mobile: +1 555-018-7582
+Email: danielrossi@example.net
+City: Jeddah
+Emergency contact: Olivia Alghamdi (00966506400303)
+Fees paid: 640.75 SAR
+Receipt number: REF-88

@@ -1,0 +1,9 @@
+RENTAL AGREEMENT SUMMARY
+
+Landlord: Emma Hakim
+Tenant: Hassan Nguyen, ID 1810334295
+Property: 7649 Prince Sultan Street, Dubai
+Monthly rent: SAR 480
+Start date: 2026-04-18
+
+The tenant can be reached on 00966527859380 and hnguyen@mail.example.com. Rent is paid to IBAN SA6540929373323589897225.

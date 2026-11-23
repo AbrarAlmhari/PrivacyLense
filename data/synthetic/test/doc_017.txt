@@ -1,0 +1,16 @@
+CURRICULUM VITAE
+
+Name: Priya Haddad
+Email: phaddad@example.org
+Mobile: +1 555-019-6890
+Address: 2092 King Fahd Road, Dhahran
+
+EXPERIENCE
+Software Engineer at Oasis Travel Agency, Amman (2023 - 2026). Built internal reporting tools and reduced processing time by 40 percent.
+Intern at Blue Falcon Logistics (2022). Supported the data quality team.
+
+EDUCATION
+Bachelor of Science in Artificial Intelligence, graduated 23 October 2026.
+
+REFERENCES
+Amina Alzahrani, Engineering Manager, Oasis Travel Agency, amina_alzahrani@example.org

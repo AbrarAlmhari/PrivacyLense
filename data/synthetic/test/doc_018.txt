@@ -1,0 +1,11 @@
+STUDENT REGISTRATION FORM
+
+Full name: Hassan Bakr
+National ID / Iqama: 2296816499
+Date of registration: 2026-01-07
+Mobile: +966 56 779 7568
+Email: hbakr@example.com
+City: Tabuk
+Emergency contact: Arjun Al-Dossary (+966 50 840 1067)
+Fees paid: $75.50
+Receipt number: REF-88

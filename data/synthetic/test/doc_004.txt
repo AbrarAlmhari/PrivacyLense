@@ -1,0 +1,11 @@
+STUDENT REGISTRATION FORM
+
+Full name: Abdullah Nasser
+National ID / Iqama: 1254535740
+Date of registration: 23 October 2026
+Mobile: +966 54 354 8285
+Email: abdullah.nasser@example.org
+City: Saudi Arabia
+Emergency contact: Hassan Sharma (+44 20 7946 0526)
+Fees paid: 640.75 SAR
+Receipt number: REF-88

@@ -1,0 +1,115 @@
+# PrivacyLens configuration
+# Every tunable value of the project lives here, so nothing important is
+# hard-coded inside the Python modules.
+
+app:
+  name: PrivacyLens
+  version: "1.0.0"
+
+logging:
+  level: INFO
+  file: outputs/logs/privacylens.log   # events and counts only, never text
+
+# ---------------------------------------------------------------- Input limits
+input:
+  max_file_mb: 20
+  max_pdf_pages: 200
+  max_characters: 500000
+
+# ------------------------------------------------------- Dataset (training data)
+data:
+  name: nvidia/Nemotron-PII
+  url: https://huggingface.co/datasets/nvidia/Nemotron-PII
+  license: CC BY 4.0
+  raw_dir: data/raw/nemotron_pii
+  download_urls:
+    train: https://huggingface.co/datasets/nvidia/Nemotron-PII/resolve/main/data/train-00000-of-00001.parquet
+    test: https://huggingface.co/datasets/nvidia/Nemotron-PII/resolve/main/data/test-00000-of-00001.parquet
+  processed_dir: data/processed
+  figures_dir: reports/figures
+  seed: 42
+  # How many documents to use (the two downloaded files hold 100,000 + 100,000 rows).
+  train_size: 20000
+  validation_size: 2000
+  test_size: 3000
+  max_text_characters: 6000    # longer documents are dropped during cleaning
+
+  # Dataset label -> PrivacyLens category. Labels that are not listed here
+  # are ignored by the AI model (structured identifiers such as emails and
+  # phone numbers are handled by the regex layer instead).
+  label_map:
+    first_name: PERSON
+    last_name: PERSON
+    company_name: ORG
+    city: LOCATION
+    state: LOCATION
+    country: LOCATION
+    county: LOCATION
+    street_address: ADDRESS
+
+  # Dataset labels with a clear regex equivalent. They are NOT used for
+  # training; they give us an independent gold set to evaluate the regex layer.
+  regex_label_map:
+    email: EMAIL
+    phone_number: PHONE
+    fax_number: PHONE
+    credit_debit_card: CREDIT_CARD
+
+# ------------------------------------------------------------- Model training
+model:
+  base_model: distilbert-base-cased     # pretrained model from Hugging Face Hub
+  output_dir: models/privacylens-ner    # where the fine-tuned model is saved
+  max_length: 256                       # tokens per window
+  stride: 32                            # overlap between windows of long texts
+  batch_size: 16
+  learning_rate: 5.0e-5
+  weight_decay: 0.01
+  warmup_ratio: 0.06
+  epochs: 3
+  seed: 42
+
+# ------------------------------------------------------------ NER at run time
+ner:
+  min_confidence: 0.50                  # detections below this are discarded
+  inference_batch_size: 16
+  # Optional: if you upload the fine-tuned model to the Hugging Face Hub, put
+  # its id here (e.g. "your-username/privacylens-ner"). It is downloaded
+  # automatically when the local model folder is missing.
+  hub_model: ""
+  # Used ONLY when the fine-tuned model folder is missing, so the app still
+  # works on a fresh machine. It is a public pretrained NER model.
+  fallback_model: dslim/distilbert-NER
+
+# ---------------------------------------------------------------- Risk scoring
+# Project-defined, transparent score. It is NOT an official privacy standard.
+risk:
+  weights:            # base points for the first unique item of a category
+    ID_LIKE: 30
+    CREDIT_CARD: 30
+    IBAN: 30
+    PHONE: 20
+    PERSON: 20
+    ADDRESS: 20
+    EMAIL: 15
+    ORG: 10
+    LOCATION: 10
+  extra_item_factor: 0.25         # each additional unique item adds 25% of base
+  category_cap_multiplier: 2      # a category gives at most 2 x its base
+  total_cap: 100
+  bands:
+    - {level: Low, max: 20}
+    - {level: Medium, max: 50}
+    - {level: High, max: 75}
+    - {level: Critical, max: 100}
+
+# -------------------------------------------------------------------- Redaction
+redaction:
+  placeholder: "[REDACTED-{category}]"
+  pdf_show_labels: true           # print the category name on the black bar
+  propagate_repeated_names: true  # also redact exact repeats of detected names
+
+# ------------------------------------------------------------------ Evaluation
+evaluation:
+  synthetic_dir: data/synthetic
+  gold_dir: data/gold
+  metrics_dir: reports/metrics

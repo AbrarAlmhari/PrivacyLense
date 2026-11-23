@@ -1,0 +1,16 @@
+CURRICULUM VITAE
+
+Name: Khalid Alghamdi
+Email: kalghamdi@example.com
+Mobile: 0565978418
+Address: 7894 Tahlia Street, Jeddah
+
+EXPERIENCE
+Software Engineer at Bright Path Institute, Amman (2023 - 2026). Built internal reporting tools and reduced processing time by 40 percent.
+Intern at Eastern Dunes Academy (2022). Supported the data quality team.
+
+EDUCATION
+Bachelor of Science in Artificial Intelligence, graduated 1 June 2026.
+
+REFERENCES
+Abdullah Nguyen, Engineering Manager, Bright Path Institute, abdullah.nguyen89@mail.example.com

@@ -1,0 +1,13 @@
+INVOICE A-7731
+
+Billed to: Maha Rossi
+Company: Najd Horizon Trading
+Address: 4133 King Fahd Road, Medina
+Phone: +44 20 7946 0246
+
+Description: Annual software subscription
+Amount due: 3,900 SAR
+Due date: 2026-01-07
+
+Payment received by card 4111480834558381. Thank you for your business.
+Questions? Write to maha_nasser@example.com.

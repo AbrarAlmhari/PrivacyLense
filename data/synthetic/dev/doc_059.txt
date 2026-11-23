@@ -1,0 +1,16 @@
+CURRICULUM VITAE
+
+Name: Khalid Alghamdi
+Email: khalid_alghamdi@mail.example.com
+Mobile: +1 555-012-8260
+Address: 4945 Corniche Road, Jeddah
+
+EXPERIENCE
+Software Engineer at Bright Path Institute, Chicago (2023 - 2026). Built internal reporting tools and reduced processing time by 40 percent.
+Intern at Harbor Point Bank (2022). Supported the data quality team.
+
+EDUCATION
+Bachelor of Science in Artificial Intelligence, graduated 05/09/2026.
+
+REFERENCES
+Omar Sharma, Engineering Manager, Bright Path Institute, omar.sharma58@mail.example.com

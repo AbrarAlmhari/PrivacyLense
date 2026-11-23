@@ -1,0 +1,11 @@
+STUDENT REGISTRATION FORM
+
+Full name: Faisal Al-Shehri
+National ID / Iqama: 1827390247
+Date of registration: 23 October 2026
+Mobile: 0556017260
+Email: falshehri@example.org
+City: Medina
+Emergency contact: Daniel Almutairi (+1 555-010-9349)
+Fees paid: 1,250.00 SAR
+Receipt number: A-7731

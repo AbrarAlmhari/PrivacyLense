@@ -1,0 +1,9 @@
+RENTAL AGREEMENT SUMMARY
+
+Landlord: Abdulrahman Al-Shehri
+Tenant: Emma Bakr, ID 2085502163
+Property: 9009 Prince Sultan Street, Cairo
+Monthly rent: 1,250.00 SAR
+Start date: 1 June 2026
+
+The tenant can be reached on +1 555-018-4578 and emma_bakr@example.net. Rent is paid to IBAN SA2914890779645840865609.

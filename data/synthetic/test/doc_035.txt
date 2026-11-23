@@ -1,0 +1,13 @@
+INVOICE REF-88
+
+Billed to: Yousef Nasser
+Company: Eastern Dunes Academy
+Address: 2903 King Abdullah Road, Jeddah
+Phone: 00966507010095
+
+Description: Annual software subscription
+Amount due: SAR 480
+Due date: 2026-04-18
+
+Payment received by card 4111217962532378. Thank you for your business.
+Questions? Write to arjun.nguyen53@example.org.

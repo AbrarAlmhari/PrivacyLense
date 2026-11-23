@@ -1,0 +1,13 @@
+INVOICE REF-88
+
+Billed to: Omar Brown
+Company: Gulf Crescent Insurance
+Address: 7267 Oak Street, Amman
+Phone: +966595354572
+
+Description: Annual software subscription
+Amount due: USD 120.00
+Due date: 2026-01-07
+
+Payment received by card 4111607283057164. Thank you for your business.
+Questions? Write to lucas.hakim@example.com.

@@ -1,0 +1,9 @@
+Appointment confirmation
+
+Patient: Mohammed Okafor
+File number: 2807239941
+Clinic: Harbor Point Bank, Toronto
+Doctor: Dr. Emma Al-Dossary
+Date: 2026-04-18 at 10:30
+
+Please arrive 15 minutes early. To reschedule, call +1 555-012-0596 or reply to arjunalotaibi@example.com. The consultation fee is SAR 480.

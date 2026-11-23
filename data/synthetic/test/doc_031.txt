@@ -1,0 +1,16 @@
+CURRICULUM VITAE
+
+Name: Mei Rossi
+Email: mei.rossi@example.com
+Mobile: +1 555-017-0128
+Address: 8721 Park Avenue, Tabuk
+
+EXPERIENCE
+Software Engineer at Bright Path Institute, Abha (2023 - 2026). Built internal reporting tools and reduced processing time by 40 percent.
+Intern at Eastern Dunes Academy (2022). Supported the data quality team.
+
+EDUCATION
+Bachelor of Science in Artificial Intelligence, graduated 05/09/2026.
+
+REFERENCES
+Lama Al-Otaibi, Engineering Manager, Bright Path Institute, lalotaibi@example.net

@@ -1,0 +1,9 @@
+RENTAL AGREEMENT SUMMARY
+
+Landlord: Faisal Martinez
+Tenant: Omar Bakr, ID 2935875360
+Property: 409 King Abdullah Road, Dammam
+Monthly rent: SAR 480
+Start date: 05/09/2026
+
+The tenant can be reached on 0508388598 and omar.bakr@mail.example.com. Rent is paid to IBAN SA3853849205427289285784.

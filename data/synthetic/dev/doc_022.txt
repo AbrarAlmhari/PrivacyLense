@@ -1,0 +1,9 @@
+Appointment confirmation
+
+Patient: Yousef Al-Otaibi
+File number: 2225444620
+Clinic: Najd Horizon Trading, Abha
+Doctor: Dr. Sophia Martinez
+Date: 12 March 2026 at 10:30
+
+Please arrive 15 minutes early. To reschedule, call (555) 011-5262 or reply to abdulrahman.johnson47@mail.example.com. The consultation fee is $75.50.

@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Raw dataset (about 300 MB, two files over GitHub's 100 MB limit).
+# Download it again with: python scripts/01_prepare_data.py
+data/raw/
+
+# The trained model IS committed: models/privacylens-ner/model.safetensors
+# is stored with Git LFS (see .gitattributes).
+
+# Local app logs and outputs (never commit user documents).
+# The training and evaluation logs are kept in reports/logs/ instead.
+outputs/
+
+# Editor / tools
+.claude/
+.vscode/
+.idea/
+.DS_Store

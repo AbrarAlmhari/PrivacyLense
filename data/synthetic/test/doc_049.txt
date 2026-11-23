@@ -1,0 +1,13 @@
+INVOICE INV-2045
+
+Billed to: Abdulrahman Mansour
+Company: Silverline Software
+Address: 5223 Olaya Street, Kuwait City
+Phone: 052 694 5385
+
+Description: Annual software subscription
+Amount due: 3,900 SAR
+Due date: 2026-04-18
+
+Payment received by card 4111291240685779. Thank you for your business.
+Questions? Write to mei_alharbi@example.net.

@@ -1,0 +1,332 @@
+{
+  "public_test_set": {
+    "documents": 3000,
+    "min_confidence": 0.5,
+    "fine_tuned_model": {
+      "per_category": {
+        "PERSON": {
+          "precision": 0.981,
+          "recall": 0.9826,
+          "f1": 0.9818,
+          "true_positives": 2885,
+          "false_positives": 56,
+          "false_negatives": 51,
+          "support": 2936
+        },
+        "ORG": {
+          "precision": 0.9055,
+          "recall": 0.9256,
+          "f1": 0.9155,
+          "true_positives": 1543,
+          "false_positives": 161,
+          "false_negatives": 124,
+          "support": 1667
+        },
+        "LOCATION": {
+          "precision": 0.9397,
+          "recall": 0.9599,
+          "f1": 0.9497,
+          "true_positives": 1793,
+          "false_positives": 115,
+          "false_negatives": 75,
+          "support": 1868
+        },
+        "ADDRESS": {
+          "precision": 0.9686,
+          "recall": 0.9726,
+          "f1": 0.9706,
+          "true_positives": 462,
+          "false_positives": 15,
+          "false_negatives": 13,
+          "support": 475
+        }
+      },
+      "overall": {
+        "precision": 0.9506,
+        "recall": 0.9621,
+        "f1": 0.9564,
+        "true_positives": 6683,
+        "false_positives": 347,
+        "false_negatives": 263,
+        "support": 6946
+      },
+      "macro_f1": 0.9544,
+      "character_recall": {
+        "PERSON": 0.9892,
+        "ORG": 0.9459,
+        "LOCATION": 0.9587,
+        "ADDRESS": 0.9961,
+        "overall": 0.9678
+      }
+    },
+    "baseline_model": {
+      "name": "dslim/distilbert-NER",
+      "per_category": {
+        "PERSON": {
+          "precision": 0.7982,
+          "recall": 0.7667,
+          "f1": 0.7821,
+          "true_positives": 2251,
+          "false_positives": 569,
+          "false_negatives": 685,
+          "support": 2936
+        },
+        "ORG": {
+          "precision": 0.406,
+          "recall": 0.7576,
+          "f1": 0.5287,
+          "true_positives": 1263,
+          "false_positives": 1848,
+          "false_negatives": 404,
+          "support": 1667
+        },
+        "LOCATION": {
+          "precision": 0.6216,
+          "recall": 0.8919,
+          "f1": 0.7326,
+          "true_positives": 1666,
+          "false_positives": 1014,
+          "false_negatives": 202,
+          "support": 1868
+        }
+      },
+      "overall": {
+        "precision": 0.6016,
+        "recall": 0.8005,
+        "f1": 0.6869,
+        "true_positives": 5180,
+        "false_positives": 3431,
+        "false_negatives": 1291,
+        "support": 6471
+      },
+      "macro_f1": 0.6811,
+      "character_recall": {
+        "PERSON": 0.8811,
+        "ORG": 0.8825,
+        "LOCATION": 0.9307,
+        "overall": 0.8917
+      }
+    },
+    "regex_layer": {
+      "per_category": {
+        "EMAIL": {
+          "precision": 0.997,
+          "recall": 0.9934,
+          "f1": 0.9952,
+          "true_positives": 1654,
+          "false_positives": 5,
+          "false_negatives": 11,
+          "support": 1665
+        },
+        "PHONE": {
+          "precision": 0.9451,
+          "recall": 0.9412,
+          "f1": 0.9432,
+          "true_positives": 896,
+          "false_positives": 52,
+          "false_negatives": 56,
+          "support": 952
+        },
+        "CREDIT_CARD": {
+          "precision": 0.919,
+          "recall": 0.9876,
+          "f1": 0.952,
+          "true_positives": 397,
+          "false_positives": 35,
+          "false_negatives": 5,
+          "support": 402
+        }
+      },
+      "overall": {
+        "precision": 0.9697,
+        "recall": 0.9762,
+        "f1": 0.9729,
+        "true_positives": 2947,
+        "false_positives": 92,
+        "false_negatives": 72,
+        "support": 3019
+      },
+      "macro_f1": 0.9635,
+      "character_recall": {
+        "EMAIL": 0.9971,
+        "PHONE": 0.9491,
+        "CREDIT_CARD": 0.9906,
+        "overall": 0.987
+      }
+    }
+  },
+  "synthetic_documents": {
+    "dev_documents": 20,
+    "test_documents": 40,
+    "threshold_study_on_dev": [
+      {
+        "threshold": 0.3,
+        "precision": 0.9429,
+        "recall": 0.9252,
+        "f1": 0.934
+      },
+      {
+        "threshold": 0.4,
+        "precision": 0.9429,
+        "recall": 0.9252,
+        "f1": 0.934
+      },
+      {
+        "threshold": 0.5,
+        "precision": 0.9429,
+        "recall": 0.9252,
+        "f1": 0.934
+      },
+      {
+        "threshold": 0.6,
+        "precision": 0.9706,
+        "recall": 0.9252,
+        "f1": 0.9474
+      },
+      {
+        "threshold": 0.7,
+        "precision": 0.99,
+        "recall": 0.9252,
+        "f1": 0.9565
+      },
+      {
+        "threshold": 0.8,
+        "precision": 0.9899,
+        "recall": 0.9159,
+        "f1": 0.9515
+      },
+      {
+        "threshold": 0.9,
+        "precision": 0.9898,
+        "recall": 0.9065,
+        "f1": 0.9463
+      }
+    ],
+    "min_confidence_used": 0.5,
+    "full_pipeline_on_test": {
+      "per_category": {
+        "EMAIL": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 39,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "support": 39
+        },
+        "PHONE": {
+          "precision": 0.9375,
+          "recall": 0.9091,
+          "f1": 0.9231,
+          "true_positives": 30,
+          "false_positives": 2,
+          "false_negatives": 3,
+          "support": 33
+        },
+        "ID_LIKE": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 14,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "support": 14
+        },
+        "CREDIT_CARD": {
+          "precision": 0.875,
+          "recall": 1.0,
+          "f1": 0.9333,
+          "true_positives": 7,
+          "false_positives": 1,
+          "false_negatives": 0,
+          "support": 7
+        },
+        "IBAN": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 9,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "support": 9
+        },
+        "PERSON": {
+          "precision": 1.0,
+          "recall": 0.9898,
+          "f1": 0.9949,
+          "true_positives": 97,
+          "false_positives": 0,
+          "false_negatives": 1,
+          "support": 98
+        },
+        "ORG": {
+          "precision": 0.8125,
+          "recall": 0.619,
+          "f1": 0.7027,
+          "true_positives": 26,
+          "false_positives": 6,
+          "false_negatives": 16,
+          "support": 42
+        },
+        "LOCATION": {
+          "precision": 0.8444,
+          "recall": 1.0,
+          "f1": 0.9157,
+          "true_positives": 38,
+          "false_positives": 7,
+          "false_negatives": 0,
+          "support": 38
+        },
+        "ADDRESS": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 17,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "support": 17
+        }
+      },
+      "overall": {
+        "precision": 0.9454,
+        "recall": 0.9327,
+        "f1": 0.939,
+        "true_positives": 277,
+        "false_positives": 16,
+        "false_negatives": 20,
+        "support": 297
+      },
+      "macro_f1": 0.9411,
+      "character_recall": {
+        "EMAIL": 1.0,
+        "PHONE": 1.0,
+        "ID_LIKE": 1.0,
+        "CREDIT_CARD": 1.0,
+        "IBAN": 1.0,
+        "PERSON": 1.0,
+        "ORG": 0.6918,
+        "LOCATION": 1.0,
+        "ADDRESS": 1.0,
+        "overall": 0.9446
+      }
+    },
+    "ai_layer_only": {
+      "precision": 0.9319,
+      "recall": 0.9128,
+      "f1": 0.9223,
+      "true_positives": 178,
+      "false_positives": 13,
+      "false_negatives": 17,
+      "support": 195
+    },
+    "regex_layer_only": {
+      "precision": 0.9706,
+      "recall": 0.9706,
+      "f1": 0.9706,
+      "true_positives": 99,
+      "false_positives": 3,
+      "false_negatives": 3,
+      "support": 102
+    }
+  }
+}

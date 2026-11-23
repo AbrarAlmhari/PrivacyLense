@@ -1,0 +1,9 @@
+Appointment confirmation
+
+Patient: Hessa Rossi
+File number: 1353461297
+Clinic: Al Waha Medical Center, Dubai
+Doctor: Dr. Layla Khoury
+Date: 2026-04-18 at 10:30
+
+Please arrive 15 minutes early. To reschedule, call (555) 012-4208 or reply to abdulrahman.alqahtani@example.com. The consultation fee is 1,250.00 SAR.

@@ -1,0 +1,1123 @@
+{
+ "doc_001": {
+  "split": "test",
+  "template": "formal_letter",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 257,
+    "end": 267
+   },
+   {
+    "label": "EMAIL",
+    "start": 299,
+    "end": 325
+   },
+   {
+    "label": "PHONE",
+    "start": 423,
+    "end": 436
+   }
+  ]
+ },
+ "doc_002": {
+  "split": "test",
+  "template": "email",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 6,
+    "end": 28
+   },
+   {
+    "label": "EMAIL",
+    "start": 33,
+    "end": 60
+   },
+   {
+    "label": "PHONE",
+    "start": 168,
+    "end": 178
+   }
+  ]
+ },
+ "doc_003": {
+  "split": "test",
+  "template": "cv",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 46,
+    "end": 72
+   },
+   {
+    "label": "PHONE",
+    "start": 81,
+    "end": 95
+   },
+   {
+    "label": "EMAIL",
+    "start": 500,
+    "end": 518
+   }
+  ]
+ },
+ "doc_004": {
+  "split": "test",
+  "template": "registration_form",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 75,
+    "end": 85
+   },
+   {
+    "label": "PHONE",
+    "start": 132,
+    "end": 148
+   },
+   {
+    "label": "EMAIL",
+    "start": 156,
+    "end": 183
+   },
+   {
+    "label": "PHONE",
+    "start": 237,
+    "end": 253
+   }
+  ]
+ },
+ "doc_005": {
+  "split": "test",
+  "template": "chat",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 174,
+    "end": 184
+   },
+   {
+    "label": "PHONE",
+    "start": 277,
+    "end": 291
+   }
+  ]
+ },
+ "doc_006": {
+  "split": "test",
+  "template": "hr_memo",
+  "entities": [
+   {
+    "label": "IBAN",
+    "start": 328,
+    "end": 357
+   },
+   {
+    "label": "EMAIL",
+    "start": 390,
+    "end": 412
+   }
+  ]
+ },
+ "doc_007": {
+  "split": "test",
+  "template": "invoice",
+  "entities": [
+   {
+    "label": "PHONE",
+    "start": 110,
+    "end": 123
+   },
+   {
+    "label": "CREDIT_CARD",
+    "start": 237,
+    "end": 253
+   },
+   {
+    "label": "EMAIL",
+    "start": 304,
+    "end": 327
+   }
+  ]
+ },
+ "doc_008": {
+  "split": "test",
+  "template": "medical_appointment",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 60,
+    "end": 70
+   },
+   {
+    "label": "PHONE",
+    "start": 213,
+    "end": 227
+   },
+   {
+    "label": "EMAIL",
+    "start": 240,
+    "end": 273
+   }
+  ]
+ },
+ "doc_009": {
+  "split": "test",
+  "template": "complaint",
+  "entities": [
+   {
+    "label": "CREDIT_CARD",
+    "start": 332,
+    "end": 351
+   },
+   {
+    "label": "PHONE",
+    "start": 398,
+    "end": 414
+   },
+   {
+    "label": "EMAIL",
+    "start": 421,
+    "end": 440
+   }
+  ]
+ },
+ "doc_010": {
+  "split": "test",
+  "template": "certificate",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 83,
+    "end": 93
+   },
+   {
+    "label": "EMAIL",
+    "start": 338,
+    "end": 357
+   }
+  ]
+ },
+ "doc_011": {
+  "split": "test",
+  "template": "meeting_notes",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 335,
+    "end": 363
+   }
+  ]
+ },
+ "doc_012": {
+  "split": "dev",
+  "template": "bank_notice",
+  "entities": [
+   {
+    "label": "IBAN",
+    "start": 115,
+    "end": 144
+   },
+   {
+    "label": "PHONE",
+    "start": 233,
+    "end": 249
+   }
+  ]
+ },
+ "doc_013": {
+  "split": "test",
+  "template": "rental_agreement",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 73,
+    "end": 83
+   },
+   {
+    "label": "PHONE",
+    "start": 202,
+    "end": 216
+   },
+   {
+    "label": "EMAIL",
+    "start": 221,
+    "end": 245
+   },
+   {
+    "label": "IBAN",
+    "start": 268,
+    "end": 292
+   }
+  ]
+ },
+ "doc_014": {
+  "split": "dev",
+  "template": "no_pii_notice",
+  "entities": []
+ },
+ "doc_015": {
+  "split": "dev",
+  "template": "formal_letter",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 248,
+    "end": 258
+   },
+   {
+    "label": "EMAIL",
+    "start": 290,
+    "end": 312
+   },
+   {
+    "label": "PHONE",
+    "start": 407,
+    "end": 421
+   }
+  ]
+ },
+ "doc_016": {
+  "split": "test",
+  "template": "email",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 6,
+    "end": 35
+   },
+   {
+    "label": "EMAIL",
+    "start": 40,
+    "end": 62
+   },
+   {
+    "label": "PHONE",
+    "start": 164,
+    "end": 177
+   }
+  ]
+ },
+ "doc_017": {
+  "split": "test",
+  "template": "cv",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 44,
+    "end": 63
+   },
+   {
+    "label": "PHONE",
+    "start": 72,
+    "end": 87
+   },
+   {
+    "label": "EMAIL",
+    "start": 505,
+    "end": 532
+   }
+  ]
+ },
+ "doc_018": {
+  "split": "test",
+  "template": "registration_form",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 71,
+    "end": 81
+   },
+   {
+    "label": "PHONE",
+    "start": 123,
+    "end": 139
+   },
+   {
+    "label": "EMAIL",
+    "start": 147,
+    "end": 164
+   },
+   {
+    "label": "PHONE",
+    "start": 214,
+    "end": 230
+   }
+  ]
+ },
+ "doc_019": {
+  "split": "test",
+  "template": "chat",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 166,
+    "end": 176
+   },
+   {
+    "label": "PHONE",
+    "start": 271,
+    "end": 286
+   }
+  ]
+ },
+ "doc_020": {
+  "split": "dev",
+  "template": "hr_memo",
+  "entities": [
+   {
+    "label": "IBAN",
+    "start": 345,
+    "end": 369
+   },
+   {
+    "label": "EMAIL",
+    "start": 402,
+    "end": 429
+   }
+  ]
+ },
+ "doc_021": {
+  "split": "dev",
+  "template": "invoice",
+  "entities": [
+   {
+    "label": "PHONE",
+    "start": 112,
+    "end": 128
+   },
+   {
+    "label": "CREDIT_CARD",
+    "start": 241,
+    "end": 257
+   },
+   {
+    "label": "EMAIL",
+    "start": 308,
+    "end": 331
+   }
+  ]
+ },
+ "doc_022": {
+  "split": "dev",
+  "template": "medical_appointment",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 65,
+    "end": 75
+   },
+   {
+    "label": "PHONE",
+    "start": 221,
+    "end": 235
+   },
+   {
+    "label": "EMAIL",
+    "start": 248,
+    "end": 286
+   }
+  ]
+ },
+ "doc_023": {
+  "split": "test",
+  "template": "complaint",
+  "entities": [
+   {
+    "label": "CREDIT_CARD",
+    "start": 321,
+    "end": 340
+   },
+   {
+    "label": "PHONE",
+    "start": 387,
+    "end": 397
+   },
+   {
+    "label": "EMAIL",
+    "start": 404,
+    "end": 429
+   }
+  ]
+ },
+ "doc_024": {
+  "split": "dev",
+  "template": "certificate",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 84,
+    "end": 94
+   },
+   {
+    "label": "EMAIL",
+    "start": 343,
+    "end": 368
+   }
+  ]
+ },
+ "doc_025": {
+  "split": "dev",
+  "template": "meeting_notes",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 334,
+    "end": 353
+   }
+  ]
+ },
+ "doc_026": {
+  "split": "test",
+  "template": "bank_notice",
+  "entities": [
+   {
+    "label": "IBAN",
+    "start": 116,
+    "end": 145
+   },
+   {
+    "label": "PHONE",
+    "start": 225,
+    "end": 241
+   }
+  ]
+ },
+ "doc_027": {
+  "split": "test",
+  "template": "rental_agreement",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 74,
+    "end": 84
+   },
+   {
+    "label": "PHONE",
+    "start": 201,
+    "end": 211
+   },
+   {
+    "label": "EMAIL",
+    "start": 216,
+    "end": 242
+   },
+   {
+    "label": "IBAN",
+    "start": 265,
+    "end": 289
+   }
+  ]
+ },
+ "doc_028": {
+  "split": "test",
+  "template": "no_pii_notice",
+  "entities": []
+ },
+ "doc_029": {
+  "split": "dev",
+  "template": "formal_letter",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 272,
+    "end": 282
+   },
+   {
+    "label": "EMAIL",
+    "start": 314,
+    "end": 337
+   },
+   {
+    "label": "PHONE",
+    "start": 428,
+    "end": 441
+   }
+  ]
+ },
+ "doc_030": {
+  "split": "dev",
+  "template": "email",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 6,
+    "end": 25
+   },
+   {
+    "label": "EMAIL",
+    "start": 30,
+    "end": 57
+   },
+   {
+    "label": "PHONE",
+    "start": 168,
+    "end": 178
+   }
+  ]
+ },
+ "doc_031": {
+  "split": "test",
+  "template": "cv",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 41,
+    "end": 62
+   },
+   {
+    "label": "PHONE",
+    "start": 71,
+    "end": 86
+   },
+   {
+    "label": "EMAIL",
+    "start": 496,
+    "end": 517
+   }
+  ]
+ },
+ "doc_032": {
+  "split": "test",
+  "template": "registration_form",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 76,
+    "end": 86
+   },
+   {
+    "label": "PHONE",
+    "start": 133,
+    "end": 143
+   },
+   {
+    "label": "EMAIL",
+    "start": 151,
+    "end": 172
+   },
+   {
+    "label": "PHONE",
+    "start": 223,
+    "end": 238
+   }
+  ]
+ },
+ "doc_033": {
+  "split": "dev",
+  "template": "chat",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 173,
+    "end": 183
+   },
+   {
+    "label": "PHONE",
+    "start": 280,
+    "end": 296
+   }
+  ]
+ },
+ "doc_034": {
+  "split": "test",
+  "template": "hr_memo",
+  "entities": [
+   {
+    "label": "IBAN",
+    "start": 332,
+    "end": 356
+   },
+   {
+    "label": "EMAIL",
+    "start": 389,
+    "end": 417
+   }
+  ]
+ },
+ "doc_035": {
+  "split": "test",
+  "template": "invoice",
+  "entities": [
+   {
+    "label": "PHONE",
+    "start": 120,
+    "end": 134
+   },
+   {
+    "label": "CREDIT_CARD",
+    "start": 245,
+    "end": 261
+   },
+   {
+    "label": "EMAIL",
+    "start": 312,
+    "end": 338
+   }
+  ]
+ },
+ "doc_036": {
+  "split": "dev",
+  "template": "medical_appointment",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 64,
+    "end": 74
+   },
+   {
+    "label": "PHONE",
+    "start": 229,
+    "end": 239
+   },
+   {
+    "label": "EMAIL",
+    "start": 252,
+    "end": 277
+   }
+  ]
+ },
+ "doc_037": {
+  "split": "test",
+  "template": "complaint",
+  "entities": [
+   {
+    "label": "CREDIT_CARD",
+    "start": 324,
+    "end": 340
+   },
+   {
+    "label": "PHONE",
+    "start": 387,
+    "end": 401
+   },
+   {
+    "label": "EMAIL",
+    "start": 408,
+    "end": 434
+   }
+  ]
+ },
+ "doc_038": {
+  "split": "test",
+  "template": "certificate",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 82,
+    "end": 92
+   },
+   {
+    "label": "EMAIL",
+    "start": 343,
+    "end": 373
+   }
+  ]
+ },
+ "doc_039": {
+  "split": "test",
+  "template": "meeting_notes",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 346,
+    "end": 370
+   }
+  ]
+ },
+ "doc_040": {
+  "split": "test",
+  "template": "bank_notice",
+  "entities": [
+   {
+    "label": "IBAN",
+    "start": 119,
+    "end": 148
+   },
+   {
+    "label": "PHONE",
+    "start": 234,
+    "end": 250
+   }
+  ]
+ },
+ "doc_041": {
+  "split": "dev",
+  "template": "rental_agreement",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 80,
+    "end": 90
+   },
+   {
+    "label": "PHONE",
+    "start": 215,
+    "end": 230
+   },
+   {
+    "label": "EMAIL",
+    "start": 235,
+    "end": 256
+   },
+   {
+    "label": "IBAN",
+    "start": 279,
+    "end": 303
+   }
+  ]
+ },
+ "doc_042": {
+  "split": "test",
+  "template": "no_pii_notice",
+  "entities": []
+ },
+ "doc_043": {
+  "split": "dev",
+  "template": "formal_letter",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 252,
+    "end": 262
+   },
+   {
+    "label": "EMAIL",
+    "start": 294,
+    "end": 320
+   },
+   {
+    "label": "PHONE",
+    "start": 411,
+    "end": 425
+   }
+  ]
+ },
+ "doc_044": {
+  "split": "dev",
+  "template": "email",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 6,
+    "end": 30
+   },
+   {
+    "label": "EMAIL",
+    "start": 35,
+    "end": 60
+   },
+   {
+    "label": "PHONE",
+    "start": 164,
+    "end": 174
+   }
+  ]
+ },
+ "doc_045": {
+  "split": "test",
+  "template": "cv",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 47,
+    "end": 68
+   },
+   {
+    "label": "PHONE",
+    "start": 77,
+    "end": 87
+   },
+   {
+    "label": "EMAIL",
+    "start": 503,
+    "end": 537
+   }
+  ]
+ },
+ "doc_046": {
+  "split": "dev",
+  "template": "registration_form",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 75,
+    "end": 85
+   },
+   {
+    "label": "PHONE",
+    "start": 127,
+    "end": 141
+   },
+   {
+    "label": "EMAIL",
+    "start": 149,
+    "end": 178
+   },
+   {
+    "label": "PHONE",
+    "start": 225,
+    "end": 241
+   }
+  ]
+ },
+ "doc_047": {
+  "split": "dev",
+  "template": "chat",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 157,
+    "end": 167
+   },
+   {
+    "label": "PHONE",
+    "start": 261,
+    "end": 275
+   }
+  ]
+ },
+ "doc_048": {
+  "split": "test",
+  "template": "hr_memo",
+  "entities": [
+   {
+    "label": "IBAN",
+    "start": 334,
+    "end": 363
+   },
+   {
+    "label": "EMAIL",
+    "start": 396,
+    "end": 424
+   }
+  ]
+ },
+ "doc_049": {
+  "split": "test",
+  "template": "invoice",
+  "entities": [
+   {
+    "label": "PHONE",
+    "start": 125,
+    "end": 137
+   },
+   {
+    "label": "CREDIT_CARD",
+    "start": 250,
+    "end": 266
+   },
+   {
+    "label": "EMAIL",
+    "start": 317,
+    "end": 340
+   }
+  ]
+ },
+ "doc_050": {
+  "split": "test",
+  "template": "medical_appointment",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 64,
+    "end": 74
+   },
+   {
+    "label": "PHONE",
+    "start": 217,
+    "end": 232
+   },
+   {
+    "label": "EMAIL",
+    "start": 245,
+    "end": 270
+   }
+  ]
+ },
+ "doc_051": {
+  "split": "test",
+  "template": "complaint",
+  "entities": [
+   {
+    "label": "CREDIT_CARD",
+    "start": 323,
+    "end": 339
+   },
+   {
+    "label": "PHONE",
+    "start": 386,
+    "end": 398
+   },
+   {
+    "label": "EMAIL",
+    "start": 405,
+    "end": 436
+   }
+  ]
+ },
+ "doc_052": {
+  "split": "dev",
+  "template": "certificate",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 85,
+    "end": 95
+   },
+   {
+    "label": "EMAIL",
+    "start": 347,
+    "end": 372
+   }
+  ]
+ },
+ "doc_053": {
+  "split": "test",
+  "template": "meeting_notes",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 334,
+    "end": 362
+   }
+  ]
+ },
+ "doc_054": {
+  "split": "test",
+  "template": "bank_notice",
+  "entities": [
+   {
+    "label": "IBAN",
+    "start": 119,
+    "end": 143
+   },
+   {
+    "label": "PHONE",
+    "start": 229,
+    "end": 245
+   }
+  ]
+ },
+ "doc_055": {
+  "split": "test",
+  "template": "rental_agreement",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 83,
+    "end": 93
+   },
+   {
+    "label": "PHONE",
+    "start": 211,
+    "end": 226
+   },
+   {
+    "label": "EMAIL",
+    "start": 231,
+    "end": 256
+   },
+   {
+    "label": "IBAN",
+    "start": 279,
+    "end": 303
+   }
+  ]
+ },
+ "doc_056": {
+  "split": "test",
+  "template": "no_pii_notice",
+  "entities": []
+ },
+ "doc_057": {
+  "split": "dev",
+  "template": "formal_letter",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 253,
+    "end": 263
+   },
+   {
+    "label": "EMAIL",
+    "start": 295,
+    "end": 317
+   },
+   {
+    "label": "PHONE",
+    "start": 407,
+    "end": 420
+   }
+  ]
+ },
+ "doc_058": {
+  "split": "test",
+  "template": "email",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 6,
+    "end": 28
+   },
+   {
+    "label": "EMAIL",
+    "start": 33,
+    "end": 54
+   },
+   {
+    "label": "PHONE",
+    "start": 163,
+    "end": 173
+   }
+  ]
+ },
+ "doc_059": {
+  "split": "dev",
+  "template": "cv",
+  "entities": [
+   {
+    "label": "EMAIL",
+    "start": 47,
+    "end": 79
+   },
+   {
+    "label": "PHONE",
+    "start": 88,
+    "end": 103
+   },
+   {
+    "label": "EMAIL",
+    "start": 512,
+    "end": 542
+   }
+  ]
+ },
+ "doc_060": {
+  "split": "test",
+  "template": "registration_form",
+  "entities": [
+   {
+    "label": "ID_LIKE",
+    "start": 72,
+    "end": 82
+   },
+   {
+    "label": "PHONE",
+    "start": 124,
+    "end": 139
+   },
+   {
+    "label": "EMAIL",
+    "start": 147,
+    "end": 170
+   },
+   {
+    "label": "PHONE",
+    "start": 220,
+    "end": 234
+   }
+  ]
+ }
+}

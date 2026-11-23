@@ -1,0 +1,11 @@
+STUDENT REGISTRATION FORM
+
+Full name: Daniel Anderson
+National ID / Iqama: 1068340027
+Date of registration: 2026-01-07
+Mobile: (555) 018-4316
+Email: daniel.anderson22@example.com
+City: Jeddah
+Emergency contact: Kenji Khoury (+966 50 261 6067)
+Fees paid: $75.50
+Receipt number: 48213

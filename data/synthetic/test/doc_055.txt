@@ -1,0 +1,9 @@
+RENTAL AGREEMENT SUMMARY
+
+Landlord: Abdulrahman Johnson
+Tenant: Khalid Alharbi, ID 2262012679
+Property: 3311 Oak Street, Al Khobar
+Monthly rent: SAR 480
+Start date: 23 October 2026
+
+The tenant can be reached on +1 555-016-8393 and khalidalharbi@example.com. Rent is paid to IBAN SA2518288835394999705801.
