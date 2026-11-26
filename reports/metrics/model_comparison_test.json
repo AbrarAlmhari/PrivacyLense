@@ -1,0 +1,510 @@
+{
+  "stage": "test",
+  "min_confidence": 0.5,
+  "models": {
+    "v1": {
+      "folder": "models/archive/privacylens-ner-v1",
+      "nemotron_test": {
+        "documents": 3000,
+        "per_category": {
+          "PERSON": {
+            "precision": 0.981,
+            "recall": 0.9826,
+            "f1": 0.9818,
+            "true_positives": 2885,
+            "false_positives": 56,
+            "false_negatives": 51,
+            "support": 2936
+          },
+          "ORG": {
+            "precision": 0.9055,
+            "recall": 0.9256,
+            "f1": 0.9155,
+            "true_positives": 1543,
+            "false_positives": 161,
+            "false_negatives": 124,
+            "support": 1667
+          },
+          "LOCATION": {
+            "precision": 0.9397,
+            "recall": 0.9599,
+            "f1": 0.9497,
+            "true_positives": 1793,
+            "false_positives": 115,
+            "false_negatives": 75,
+            "support": 1868
+          },
+          "ADDRESS": {
+            "precision": 0.9686,
+            "recall": 0.9726,
+            "f1": 0.9706,
+            "true_positives": 462,
+            "false_positives": 15,
+            "false_negatives": 13,
+            "support": 475
+          }
+        },
+        "overall": {
+          "precision": 0.9506,
+          "recall": 0.9621,
+          "f1": 0.9564,
+          "true_positives": 6683,
+          "false_positives": 347,
+          "false_negatives": 263,
+          "support": 6946
+        },
+        "macro_f1": 0.9544
+      },
+      "org_supplement_test": {
+        "documents": 100,
+        "per_category": {
+          "PERSON": {
+            "precision": 0.9434,
+            "recall": 1.0,
+            "f1": 0.9709,
+            "true_positives": 50,
+            "false_positives": 3,
+            "false_negatives": 0,
+            "support": 50
+          },
+          "ORG": {
+            "precision": 0.8216,
+            "recall": 0.8036,
+            "f1": 0.8125,
+            "true_positives": 221,
+            "false_positives": 48,
+            "false_negatives": 54,
+            "support": 275
+          },
+          "LOCATION": {
+            "precision": 1.0,
+            "recall": 0.68,
+            "f1": 0.8095,
+            "true_positives": 34,
+            "false_positives": 0,
+            "false_negatives": 16,
+            "support": 50
+          },
+          "ADDRESS": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "true_positives": 0,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 0
+          }
+        },
+        "overall": {
+          "precision": 0.8567,
+          "recall": 0.8133,
+          "f1": 0.8345,
+          "true_positives": 305,
+          "false_positives": 51,
+          "false_negatives": 70,
+          "support": 375
+        },
+        "macro_f1": 0.8643
+      },
+      "synthetic_test_ai_layer": {
+        "documents": 40,
+        "per_category": {
+          "PERSON": {
+            "precision": 1.0,
+            "recall": 0.9898,
+            "f1": 0.9949,
+            "true_positives": 97,
+            "false_positives": 0,
+            "false_negatives": 1,
+            "support": 98
+          },
+          "ORG": {
+            "precision": 0.8387,
+            "recall": 0.619,
+            "f1": 0.7123,
+            "true_positives": 26,
+            "false_positives": 5,
+            "false_negatives": 16,
+            "support": 42
+          },
+          "LOCATION": {
+            "precision": 0.8444,
+            "recall": 1.0,
+            "f1": 0.9157,
+            "true_positives": 38,
+            "false_positives": 7,
+            "false_negatives": 0,
+            "support": 38
+          },
+          "ADDRESS": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 17,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 17
+          }
+        },
+        "overall": {
+          "precision": 0.9368,
+          "recall": 0.9128,
+          "f1": 0.9247,
+          "true_positives": 178,
+          "false_positives": 12,
+          "false_negatives": 17,
+          "support": 195
+        },
+        "macro_f1": 0.9057
+      },
+      "synthetic_test_full_pipeline": {
+        "documents": 40,
+        "per_category": {
+          "EMAIL": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 39,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 39
+          },
+          "PHONE": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 33,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 33
+          },
+          "ID_LIKE": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 14,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 14
+          },
+          "CREDIT_CARD": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 7,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 7
+          },
+          "IBAN": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 9,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 9
+          },
+          "PERSON": {
+            "precision": 1.0,
+            "recall": 0.9898,
+            "f1": 0.9949,
+            "true_positives": 97,
+            "false_positives": 0,
+            "false_negatives": 1,
+            "support": 98
+          },
+          "ORG": {
+            "precision": 0.8125,
+            "recall": 0.619,
+            "f1": 0.7027,
+            "true_positives": 26,
+            "false_positives": 6,
+            "false_negatives": 16,
+            "support": 42
+          },
+          "LOCATION": {
+            "precision": 0.8444,
+            "recall": 1.0,
+            "f1": 0.9157,
+            "true_positives": 38,
+            "false_positives": 7,
+            "false_negatives": 0,
+            "support": 38
+          },
+          "ADDRESS": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 17,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 17
+          }
+        },
+        "overall": {
+          "precision": 0.9556,
+          "recall": 0.9428,
+          "f1": 0.9492,
+          "true_positives": 280,
+          "false_positives": 13,
+          "false_negatives": 17,
+          "support": 297
+        },
+        "macro_f1": 0.957
+      }
+    },
+    "v2": {
+      "folder": "models/experiments/v2_repeat1",
+      "nemotron_test": {
+        "documents": 3000,
+        "per_category": {
+          "PERSON": {
+            "precision": 0.9826,
+            "recall": 0.9809,
+            "f1": 0.9818,
+            "true_positives": 2880,
+            "false_positives": 51,
+            "false_negatives": 56,
+            "support": 2936
+          },
+          "ORG": {
+            "precision": 0.9096,
+            "recall": 0.9418,
+            "f1": 0.9254,
+            "true_positives": 1570,
+            "false_positives": 156,
+            "false_negatives": 97,
+            "support": 1667
+          },
+          "LOCATION": {
+            "precision": 0.9491,
+            "recall": 0.9588,
+            "f1": 0.9539,
+            "true_positives": 1791,
+            "false_positives": 96,
+            "false_negatives": 77,
+            "support": 1868
+          },
+          "ADDRESS": {
+            "precision": 0.9791,
+            "recall": 0.9853,
+            "f1": 0.9822,
+            "true_positives": 468,
+            "false_positives": 10,
+            "false_negatives": 7,
+            "support": 475
+          }
+        },
+        "overall": {
+          "precision": 0.9554,
+          "recall": 0.9659,
+          "f1": 0.9606,
+          "true_positives": 6709,
+          "false_positives": 313,
+          "false_negatives": 237,
+          "support": 6946
+        },
+        "macro_f1": 0.9608
+      },
+      "org_supplement_test": {
+        "documents": 100,
+        "per_category": {
+          "PERSON": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 50,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 50
+          },
+          "ORG": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 275,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 275
+          },
+          "LOCATION": {
+            "precision": 1.0,
+            "recall": 0.98,
+            "f1": 0.9899,
+            "true_positives": 49,
+            "false_positives": 0,
+            "false_negatives": 1,
+            "support": 50
+          },
+          "ADDRESS": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "true_positives": 0,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 0
+          }
+        },
+        "overall": {
+          "precision": 1.0,
+          "recall": 0.9973,
+          "f1": 0.9987,
+          "true_positives": 374,
+          "false_positives": 0,
+          "false_negatives": 1,
+          "support": 375
+        },
+        "macro_f1": 0.9966
+      },
+      "synthetic_test_ai_layer": {
+        "documents": 40,
+        "per_category": {
+          "PERSON": {
+            "precision": 1.0,
+            "recall": 0.9898,
+            "f1": 0.9949,
+            "true_positives": 97,
+            "false_positives": 0,
+            "false_negatives": 1,
+            "support": 98
+          },
+          "ORG": {
+            "precision": 0.8,
+            "recall": 0.5714,
+            "f1": 0.6667,
+            "true_positives": 24,
+            "false_positives": 6,
+            "false_negatives": 18,
+            "support": 42
+          },
+          "LOCATION": {
+            "precision": 0.9048,
+            "recall": 1.0,
+            "f1": 0.95,
+            "true_positives": 38,
+            "false_positives": 4,
+            "false_negatives": 0,
+            "support": 38
+          },
+          "ADDRESS": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 17,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 17
+          }
+        },
+        "overall": {
+          "precision": 0.9462,
+          "recall": 0.9026,
+          "f1": 0.9239,
+          "true_positives": 176,
+          "false_positives": 10,
+          "false_negatives": 19,
+          "support": 195
+        },
+        "macro_f1": 0.9029
+      },
+      "synthetic_test_full_pipeline": {
+        "documents": 40,
+        "per_category": {
+          "EMAIL": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 39,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 39
+          },
+          "PHONE": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 33,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 33
+          },
+          "ID_LIKE": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 14,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 14
+          },
+          "CREDIT_CARD": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 7,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 7
+          },
+          "IBAN": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 9,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 9
+          },
+          "PERSON": {
+            "precision": 1.0,
+            "recall": 0.9898,
+            "f1": 0.9949,
+            "true_positives": 97,
+            "false_positives": 0,
+            "false_negatives": 1,
+            "support": 98
+          },
+          "ORG": {
+            "precision": 0.8,
+            "recall": 0.5714,
+            "f1": 0.6667,
+            "true_positives": 24,
+            "false_positives": 6,
+            "false_negatives": 18,
+            "support": 42
+          },
+          "LOCATION": {
+            "precision": 0.9048,
+            "recall": 1.0,
+            "f1": 0.95,
+            "true_positives": 38,
+            "false_positives": 4,
+            "false_negatives": 0,
+            "support": 38
+          },
+          "ADDRESS": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 17,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 17
+          }
+        },
+        "overall": {
+          "precision": 0.9653,
+          "recall": 0.936,
+          "f1": 0.9504,
+          "true_positives": 278,
+          "false_positives": 10,
+          "false_negatives": 19,
+          "support": 297
+        },
+        "macro_f1": 0.9568
+      }
+    }
+  }
+}

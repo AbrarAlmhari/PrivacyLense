@@ -55,6 +55,22 @@ data:
     fax_number: PHONE
     credit_debit_card: CREDIT_CARD
 
+# ---------------------------------------- Extra ORG documents made by the team
+# 500 short business documents (20 templates x 25 sets of company names) that
+# were written to teach the model more company names. See docs/DATASET_UPDATE.md.
+org_supplement:
+  source_file: data/extra/org_supplement_raw.jsonl
+  seed: 303
+  # Whole templates are held out, so validation and test use sentences the
+  # model never saw in training (only the company names would differ otherwise).
+  validation_templates: 2     # 1 structured + 1 unstructured
+  test_templates: 4           # 2 structured + 2 unstructured
+  # The source file labels only ORG. These are the other names that appear in
+  # the 20 templates (found by reading every template once); they are labelled
+  # automatically so the model is not taught that a person or a city is "nothing".
+  person_names: [Sarah Mitchell, James Carter, Daniel Morgan, Michael Brown, Olivia Bennett, Emily Wilson, Harrison Cole]
+  location_names: [Riyadh, London, Manchester, Dubai, Toronto, Rotterdam, Singapore, Cambridge, Abu Dhabi, Doha, Madrid, Bristol]
+
 # ------------------------------------------------------------- Model training
 model:
   base_model: distilbert-base-cased     # pretrained model from Hugging Face Hub
@@ -67,6 +83,10 @@ model:
   warmup_ratio: 0.06
   epochs: 3
   seed: 42
+  # Extra training files added to data/processed/train.jsonl (created by
+  # scripts/05_prepare_org_supplement.py). Empty list = Nemotron data only.
+  extra_train_files: [data/processed/org_supplement_train.jsonl]
+  extra_train_repeat: 1       # how many times each extra document is used per epoch
 
 # ------------------------------------------------------------ NER at run time
 ner:

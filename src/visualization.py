@@ -131,11 +131,16 @@ def plot_scores_by_category(per_category: dict, title: str) -> Figure:
     return figure
 
 
-def plot_model_comparison(results: dict[str, dict], categories: tuple[str, ...]) -> Figure:
+def plot_model_comparison(
+    results: dict[str, dict],
+    categories: tuple[str, ...],
+    title: str = "Fine-tuned model vs. off-the-shelf model",
+    colors: list[str] | None = None,
+) -> Figure:
     """F1 per category for several models side by side."""
     figure, axis = plt.subplots(figsize=(7.5, 3.8))
     width = 0.8 / max(len(results), 1)
-    colors = ["#2a9d8f", "#b6bfcc", "#457b9d"]
+    colors = colors or ["#2a9d8f", "#b6bfcc", "#457b9d"]
     for model_index, (model_name, scores) in enumerate(results.items()):
         positions = [index + (model_index - (len(results) - 1) / 2) * width for index in range(len(categories))]
         values = [scores["per_category"].get(category, {}).get("f1", 0) for category in categories]
@@ -147,7 +152,7 @@ def plot_model_comparison(results: dict[str, dict], categories: tuple[str, ...])
     axis.set_xticklabels(categories)
     axis.set_ylim(0, 1.3)
     axis.set_ylabel("F1 (entity-level, strict)")
-    axis.set_title("Fine-tuned model vs. off-the-shelf model")
+    axis.set_title(title)
     axis.legend(fontsize=8)
     axis.spines[["top", "right"]].set_visible(False)
     axis.grid(axis="y", alpha=0.25)

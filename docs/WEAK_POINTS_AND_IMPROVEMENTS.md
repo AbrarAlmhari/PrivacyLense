@@ -8,7 +8,8 @@ How to read the tables:
 
 - **Impact** says how much the point matters for a user or for the grade: High, Medium or Low.
 - **How we know** says whether the point was *measured* (a number from the evaluation),
-  *tested* (tried by hand on 16 November 2026), or is *by design* (a known choice, not tested).
+  *tested* (tried by hand on 16 or 26 November 2026), or is *by design* (a known choice, not tested).
+- Numbers are for model version 2 (26 November 2026) unless version 1 is named.
 
 ## 1. The ten most important points
 
@@ -29,28 +30,40 @@ How to read the tables:
 
 ### 2.1 Organisations that are not companies
 
-**How we know: measured and tested.** On the 40 fictional test documents the model finds only
-62% of organisation names exactly (precision 0.81, recall 0.62, F1 0.70). On the public test set,
-where organisations are companies, it reaches F1 0.92.
+**How we know: measured and tested.** On the 40 fictional test documents model version 2 finds
+only 57% of organisation names exactly (precision 0.80, recall 0.57, F1 0.67; version 1: 0.81,
+0.62, 0.70). On the public test set, where organisations are companies, it reaches F1 0.93
+(version 1: 0.92).
 
-Examples tested by hand:
+**What the team's extra ORG documents changed (26 November 2026).** Version 2 was trained with 350
+of the team's business documents. It now recognises company names in short business forms very
+well (ORG F1 1.00 on held-out templates, version 1: 0.81) and is slightly better on the public test
+set, but the problem below is **not solved**: those documents contain only company names, in 20
+sentence patterns. Details: the Dataset Update document.
 
-| Text | Result |
-|---|---|
-| "She studied at Imam Abdulrahman Bin Faisal University and works at King Fahd Hospital in Dammam." | Only "Dammam" is found. Both institutions are missed. |
-| "Intern at Red Sea Analytics" (in the sample CV of the app) | Missed. |
-| "Al Waha Medical Center" | Only "Al" or "Al Waha" is marked, and as a place. |
-| "Oasis Travel Agency" | Only "Oasis" is marked. |
+Examples tested by hand (version 1 on 16 November, both versions on 26 November):
+
+| Text | Version 1 | Version 2 |
+|---|---|---|
+| "She studied at Imam Abdulrahman Bin Faisal University and works at King Fahd Hospital in Dammam." | Only "Dammam" is found. Both institutions are missed. | The same, and "King Fahd" is wrongly marked as an address. |
+| "Intern at Red Sea Analytics" (in the sample CV of the app) | Only "Analytics". | "Sea Analytics" (still incomplete). |
+| "Al Waha Medical Center" | Missed (or only "Al Waha", as a place). | Missed. |
+| "Oasis Travel Agency" | Only "Oasis" is marked. | **Found completely.** |
 
 **Cause.** The training data labels company names. Institutions follow another pattern.
 
 **Improvements.**
 
-- Add institution names to the training data: copy training documents and replace the company
-  name with names of universities, hospitals, ministries and schools, then retrain.
+- Add institution names to the training data: documents with universities, hospitals, ministries
+  and schools, written in **many different sentence patterns**, with every person, place and
+  organisation labelled. More copies of the same templates do not help (the team's documents
+  showed this: using them three times gave no gain).
+- Try Few-NERD, which the team found: its organisation types (company, education, government,
+  ...) give the variety that is missing. Check its licence first.
 - Add a simple rule: when a detected name is directly followed by a word such as University,
   Hospital, Center, Academy, Agency or Ministry, extend the item to include it.
-- Check the result on the development documents, not on the test documents.
+- Check the result on the development documents, not on the test documents
+  (`scripts/06_compare_models.py --stage validation`).
 
 ### 2.2 Lower-case and upper-case text
 
@@ -105,7 +118,8 @@ and to the colours, then retrain and re-evaluate. Web and IP addresses can also 
 | Point | Detail | Possible improvement |
 |---|---|---|
 | Only part of the data was used | 20,000 of about 200,000 documents | Train on 50,000 or more and compare |
-| One training run | One random seed, 3 epochs, no search for better settings | Run 2 or 3 seeds and report the spread |
+| One training run | One random seed, 3 epochs, no search for better settings. Two runs with almost the same data (26 November) differed by 0.002 in validation F1, so differences of that size between versions can be chance. | Run 2 or 3 seeds and report the spread |
+| Validation and training share "sister" documents | Nemotron-PII has a US and an international version of every document. Script 01 splits by row, so 420 of the 2,000 validation documents have their other version in the training split. Validation scores may be slightly optimistic; the test split is not affected. | Split by `uid` in `src/data_preparation.py` (`transform`) at the next rebuild |
 | Small base model | DistilBERT was chosen for speed | Try a larger model if a stronger GPU is available |
 | Results are not exactly repeatable | GPU training gives slightly different numbers each run | State this in the report; keep the trained model file |
 
@@ -141,9 +155,11 @@ ID", "Order", "Invoice") to raise or lower confidence.
 **By design.** The project rule "no real personal data" means that no real document was used.
 This is the right choice for privacy, but the real-world quality is therefore unknown.
 
-- The public test set (F1 0.956) comes from the same generator as the training data.
+- The public test set (F1 0.961) comes from the same generator as the training data.
   It shows that the model learned its task. It probably overstates quality on real documents.
-- The 40 fictional test documents (F1 0.949) have a different style but come from only
+- The team's ORG test documents (ORG F1 1.00) are short, regular forms whose company-name
+  families were seen in training; this number is optimistic too.
+- The 40 fictional test documents (F1 0.950) have a different style but come from only
   14 templates, written by the same developer who wrote the rules. With so few documents, one or
   two errors change a category's score visibly.
 
@@ -155,9 +171,10 @@ cross-labelling that Plan v2 asked for.
 
 | Point | Detail |
 |---|---|
-| Two rule fixes were made after reading test errors | The fictional-test scores for PHONE and CREDIT_CARD (1.00) are slightly optimistic. The strictly held-out result is F1 0.939 overall instead of 0.949. This is recorded in the project log. |
+| Two rule fixes were made after reading test errors | The fictional-test scores for PHONE and CREDIT_CARD (1.00) are slightly optimistic. With model version 1 the strictly held-out result was F1 0.939 overall instead of 0.949. This is recorded in the project log. |
+| The origin of the team's ORG documents is not recorded | Who wrote the 500 documents and with which tool must be added to the data-sources document (marked `TO COMPLETE`). |
 | The correct answers for the fictional documents were not checked by a person | They are written automatically by the generator. A member should review a sample. |
-| The comparison with the baseline model is not fully fair | The baseline was trained with other labelling habits and has no ADDRESS category. Part of the gap (0.687 against 0.956) comes from that. Say this when presenting the number. |
+| The comparison with the baseline model is not fully fair | The baseline was trained with other labelling habits and has no ADDRESS category. Part of the gap (0.687 against 0.961) comes from that. Say this when presenting the number. |
 | The confidence threshold could be higher | On the development documents, 0.7 gives better precision with the same recall. 0.5 was kept to stay on the safe side. |
 | No test with real users | Nobody outside the build has tried the app yet. |
 
@@ -203,7 +220,7 @@ cross-labelling that Plan v2 asked for.
 | Very recent library versions | The fixed versions need Python 3.12 or newer. The installation was tested on Windows 11 only, not on macOS or Linux. |
 | Tests that need the model are skipped when it is missing | All tests can pass on a computer without the trained model. Check that no test was skipped before trusting a green result. |
 | The app is one file of about 620 lines | It works, but it is the hardest file to read. It could be split into one file per tab. |
-| The app screens are not tested automatically | The logic behind them is tested (109 tests); the screens were checked by hand and with screenshots. |
+| The app screens are not tested automatically | The logic behind them is tested (122 tests); the screens were checked by hand and with screenshots. |
 | One licence is stricter than the others | PyMuPDF uses the AGPL licence. Fine for a course project with public code; check before any commercial use. |
 
 ## 7. Project and course points
@@ -241,14 +258,15 @@ for transparency about this.
 **Quick (about an hour each)**
 
 1. Give every team member (and the instructor, if the repository is private) access to the GitHub repository.
-2. Fill in the team sections of the AI usage report.
+2. Fill in the team sections of the AI usage report, and record who made the 500 ORG documents and how.
 3. Show an empty cell instead of "None" for rule detections.
 4. Lower the risk weight of generic long numbers.
 
 **Medium (half a day each)**
 
 5. Retrain with lower-case and upper-case copies of training documents (point 2.2).
-6. Add institution names to the training data and the "University / Hospital" rule (point 2.1).
+6. Add institution names (varied sentences, or Few-NERD) to the training data and the
+   "University / Hospital" rule (point 2.1).
 7. Add two or three new categories from the dataset, for example date of birth and web address (point 2.4).
 8. Write and label 20 to 30 realistic test documents by hand (point 4.1).
 

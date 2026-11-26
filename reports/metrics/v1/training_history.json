@@ -1,0 +1,65 @@
+{
+  "base_model": "distilbert-base-cased",
+  "labels": [
+    "O",
+    "B-PERSON",
+    "I-PERSON",
+    "B-ORG",
+    "I-ORG",
+    "B-LOCATION",
+    "I-LOCATION",
+    "B-ADDRESS",
+    "I-ADDRESS"
+  ],
+  "trained_at": "2026-11-16T02:03:51",
+  "training_minutes": 16.86,
+  "device": "NVIDIA GeForce RTX 3050",
+  "train_documents": 20000,
+  "validation_documents": 2000,
+  "train_windows": 31467,
+  "hyperparameters": {
+    "max_length": 256,
+    "stride": 32,
+    "batch_size": 16,
+    "learning_rate": 5e-05,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.06,
+    "epochs": 3,
+    "seed": 42
+  },
+  "best_validation_f1": 0.9657,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.05347,
+      "validation_loss": 0.00813,
+      "validation_precision": 0.9445,
+      "validation_recall": 0.9614,
+      "validation_f1": 0.9529,
+      "elapsed_minutes": 5.86
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.00385,
+      "validation_loss": 0.00781,
+      "validation_precision": 0.9549,
+      "validation_recall": 0.9612,
+      "validation_f1": 0.958,
+      "elapsed_minutes": 11.46
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0019,
+      "validation_loss": 0.00775,
+      "validation_precision": 0.958,
+      "validation_recall": 0.9735,
+      "validation_f1": 0.9657,
+      "elapsed_minutes": 16.85
+    }
+  ],
+  "versions": {
+    "python": "3.14.7",
+    "torch": "2.14.1+cu126",
+    "transformers": "5.23.0"
+  }
+}

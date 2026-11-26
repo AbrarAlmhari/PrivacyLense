@@ -5,58 +5,58 @@
     "fine_tuned_model": {
       "per_category": {
         "PERSON": {
-          "precision": 0.981,
-          "recall": 0.9826,
+          "precision": 0.9826,
+          "recall": 0.9809,
           "f1": 0.9818,
-          "true_positives": 2885,
-          "false_positives": 56,
-          "false_negatives": 51,
+          "true_positives": 2880,
+          "false_positives": 51,
+          "false_negatives": 56,
           "support": 2936
         },
         "ORG": {
-          "precision": 0.9055,
-          "recall": 0.9256,
-          "f1": 0.9155,
-          "true_positives": 1543,
-          "false_positives": 161,
-          "false_negatives": 124,
+          "precision": 0.9096,
+          "recall": 0.9418,
+          "f1": 0.9254,
+          "true_positives": 1570,
+          "false_positives": 156,
+          "false_negatives": 97,
           "support": 1667
         },
         "LOCATION": {
-          "precision": 0.9397,
-          "recall": 0.9599,
-          "f1": 0.9497,
-          "true_positives": 1793,
-          "false_positives": 115,
-          "false_negatives": 75,
+          "precision": 0.9491,
+          "recall": 0.9588,
+          "f1": 0.9539,
+          "true_positives": 1791,
+          "false_positives": 96,
+          "false_negatives": 77,
           "support": 1868
         },
         "ADDRESS": {
-          "precision": 0.9686,
-          "recall": 0.9726,
-          "f1": 0.9706,
-          "true_positives": 462,
-          "false_positives": 15,
-          "false_negatives": 13,
+          "precision": 0.9791,
+          "recall": 0.9853,
+          "f1": 0.9822,
+          "true_positives": 468,
+          "false_positives": 10,
+          "false_negatives": 7,
           "support": 475
         }
       },
       "overall": {
-        "precision": 0.9506,
-        "recall": 0.9621,
-        "f1": 0.9564,
-        "true_positives": 6683,
-        "false_positives": 347,
-        "false_negatives": 263,
+        "precision": 0.9554,
+        "recall": 0.9659,
+        "f1": 0.9606,
+        "true_positives": 6709,
+        "false_positives": 313,
+        "false_negatives": 237,
         "support": 6946
       },
-      "macro_f1": 0.9544,
+      "macro_f1": 0.9608,
       "character_recall": {
-        "PERSON": 0.9892,
-        "ORG": 0.9459,
-        "LOCATION": 0.9587,
-        "ADDRESS": 0.9961,
-        "overall": 0.9678
+        "PERSON": 0.9884,
+        "ORG": 0.9616,
+        "LOCATION": 0.9564,
+        "ADDRESS": 0.9973,
+        "overall": 0.9733
       }
     },
     "baseline_model": {
@@ -161,45 +161,45 @@
     "threshold_study_on_dev": [
       {
         "threshold": 0.3,
-        "precision": 0.9429,
-        "recall": 0.9252,
-        "f1": 0.934
+        "precision": 0.9709,
+        "recall": 0.9346,
+        "f1": 0.9524
       },
       {
         "threshold": 0.4,
-        "precision": 0.9429,
-        "recall": 0.9252,
-        "f1": 0.934
+        "precision": 0.9709,
+        "recall": 0.9346,
+        "f1": 0.9524
       },
       {
         "threshold": 0.5,
-        "precision": 0.9429,
-        "recall": 0.9252,
-        "f1": 0.934
+        "precision": 0.9709,
+        "recall": 0.9346,
+        "f1": 0.9524
       },
       {
         "threshold": 0.6,
-        "precision": 0.9706,
-        "recall": 0.9252,
-        "f1": 0.9474
+        "precision": 0.9804,
+        "recall": 0.9346,
+        "f1": 0.9569
       },
       {
         "threshold": 0.7,
-        "precision": 0.99,
-        "recall": 0.9252,
-        "f1": 0.9565
+        "precision": 0.9901,
+        "recall": 0.9346,
+        "f1": 0.9615
       },
       {
         "threshold": 0.8,
-        "precision": 0.9899,
-        "recall": 0.9159,
-        "f1": 0.9515
-      },
-      {
-        "threshold": 0.9,
         "precision": 0.9898,
         "recall": 0.9065,
         "f1": 0.9463
+      },
+      {
+        "threshold": 0.9,
+        "precision": 0.9888,
+        "recall": 0.8224,
+        "f1": 0.898
       }
     ],
     "min_confidence_used": 0.5,
@@ -260,20 +260,20 @@
           "support": 98
         },
         "ORG": {
-          "precision": 0.8125,
-          "recall": 0.619,
-          "f1": 0.7027,
-          "true_positives": 26,
+          "precision": 0.8,
+          "recall": 0.5714,
+          "f1": 0.6667,
+          "true_positives": 24,
           "false_positives": 6,
-          "false_negatives": 16,
+          "false_negatives": 18,
           "support": 42
         },
         "LOCATION": {
-          "precision": 0.8444,
+          "precision": 0.9048,
           "recall": 1.0,
-          "f1": 0.9157,
+          "f1": 0.95,
           "true_positives": 38,
-          "false_positives": 7,
+          "false_positives": 4,
           "false_negatives": 0,
           "support": 38
         },
@@ -288,15 +288,15 @@
         }
       },
       "overall": {
-        "precision": 0.9556,
-        "recall": 0.9428,
-        "f1": 0.9492,
-        "true_positives": 280,
-        "false_positives": 13,
-        "false_negatives": 17,
+        "precision": 0.9653,
+        "recall": 0.936,
+        "f1": 0.9504,
+        "true_positives": 278,
+        "false_positives": 10,
+        "false_negatives": 19,
         "support": 297
       },
-      "macro_f1": 0.957,
+      "macro_f1": 0.9568,
       "character_recall": {
         "EMAIL": 1.0,
         "PHONE": 1.0,
@@ -304,19 +304,19 @@
         "CREDIT_CARD": 1.0,
         "IBAN": 1.0,
         "PERSON": 1.0,
-        "ORG": 0.6918,
+        "ORG": 0.6464,
         "LOCATION": 1.0,
         "ADDRESS": 1.0,
-        "overall": 0.9446
+        "overall": 0.9365
       }
     },
     "ai_layer_only": {
-      "precision": 0.9319,
-      "recall": 0.9128,
-      "f1": 0.9223,
-      "true_positives": 178,
-      "false_positives": 13,
-      "false_negatives": 17,
+      "precision": 0.9462,
+      "recall": 0.9026,
+      "f1": 0.9239,
+      "true_positives": 176,
+      "false_positives": 10,
+      "false_negatives": 19,
       "support": 195
     },
     "regex_layer_only": {
@@ -328,5 +328,56 @@
       "false_negatives": 0,
       "support": 102
     }
+  },
+  "org_supplement_test_set": {
+    "per_category": {
+      "PERSON": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "true_positives": 50,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "support": 50
+      },
+      "ORG": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "true_positives": 275,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "support": 275
+      },
+      "LOCATION": {
+        "precision": 1.0,
+        "recall": 0.98,
+        "f1": 0.9899,
+        "true_positives": 49,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "support": 50
+      },
+      "ADDRESS": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "support": 0
+      }
+    },
+    "overall": {
+      "precision": 1.0,
+      "recall": 0.9973,
+      "f1": 0.9987,
+      "true_positives": 374,
+      "false_positives": 0,
+      "false_negatives": 1,
+      "support": 375
+    },
+    "macro_f1": 0.9966,
+    "documents": 100
   }
 }

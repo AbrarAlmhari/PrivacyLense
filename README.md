@@ -12,7 +12,7 @@ lets you choose what to hide, and exports a sanitized text file and a **truly re
 | **AI task** | Named Entity Recognition (token classification) with a transformer we fine-tuned ourselves |
 | **Detects with AI** | `PERSON`, `ORG`, `LOCATION`, `ADDRESS` |
 | **Detects with rules** | `EMAIL`, `PHONE` (incl. Saudi formats), `ID_LIKE`, `CREDIT_CARD`, `IBAN` |
-| **Dataset** | [NVIDIA Nemotron-PII](https://huggingface.co/datasets/nvidia/Nemotron-PII) (CC BY 4.0, fully synthetic) |
+| **Dataset** | [NVIDIA Nemotron-PII](https://huggingface.co/datasets/nvidia/Nemotron-PII) (CC BY 4.0, fully synthetic) + 500 fictional ORG documents written by the team |
 | **Base model** | [distilbert-base-cased](https://huggingface.co/distilbert/distilbert-base-cased) (Apache 2.0) |
 | **Interface** | Streamlit |
 | **Language** | English (Arabic is future work; Arabic-Indic digits are supported in the rules) |
@@ -27,22 +27,29 @@ lets you choose what to hide, and exports a sanitized text file and a **truly re
 All numbers are produced by `scripts/04_evaluate.py` and stored in `reports/metrics/`.
 Entity-level scores are **strict**: a prediction counts only if the category and both boundaries match exactly.
 
+The model is **version 2** (26 November 2026): trained on Nemotron-PII plus 350 of the team's own
+business documents with company names. What changed against version 1 is explained in
+[`docs/DATASET_UPDATE.md`](docs/DATASET_UPDATE.md).
+
 **AI model on 3,000 unseen public test documents**
 
-| Category | Precision | Recall | F1 | Gold entities |
-|---|---|---|---|---|
-| PERSON | 0.981 | 0.983 | 0.982 | 2,936 |
-| ORG | 0.905 | 0.926 | 0.915 | 1,667 |
-| LOCATION | 0.940 | 0.960 | 0.950 | 1,868 |
-| ADDRESS | 0.969 | 0.973 | 0.971 | 475 |
-| **Overall** | **0.951** | **0.962** | **0.956** | 6,946 |
+| Category | Precision | Recall | F1 | Gold entities | F1 of v1 |
+|---|---|---|---|---|---|
+| PERSON | 0.983 | 0.981 | 0.982 | 2,936 | 0.982 |
+| ORG | 0.910 | 0.942 | 0.925 | 1,667 | 0.915 |
+| LOCATION | 0.949 | 0.959 | 0.954 | 1,868 | 0.950 |
+| ADDRESS | 0.979 | 0.985 | 0.982 | 475 | 0.971 |
+| **Overall** | **0.955** | **0.966** | **0.961** | 6,946 | 0.956 |
 
 The same test with an off-the-shelf NER model (`dslim/distilbert-NER`, no fine-tuning) gives F1 **0.687**,
 so fine-tuning on PII data clearly helps (part of the gap comes from different labelling conventions: the baseline was trained on news text). Regex layer on the same documents: F1 **0.974** (EMAIL 0.995, PHONE 0.943, CREDIT_CARD 0.962).
 
 **Complete pipeline on 40 held-out synthetic documents** (fictional letters, CVs, forms, chats):
-precision **0.956**, recall **0.943**, F1 **0.949**; 94.5% of all sensitive characters are covered.
-The weakest category is `ORG` (F1 0.70): see [Limitations](#limitations).
+precision **0.965**, recall **0.936**, F1 **0.950**; 93.7% of all sensitive characters are covered.
+The weakest category is `ORG` (F1 0.67; version 1: 0.70): see [Limitations](#limitations).
+
+**The team's ORG documents** (100 documents from 4 templates not used in training): ORG F1 **1.00**
+(version 1: 0.81). This number is optimistic; see the dataset update.
 
 ---
 
@@ -86,7 +93,7 @@ For GPU training install the CUDA build of PyTorch first:
 1. **Start here:** read [`docs/pdf/1_PrivacyLens_Project_Record.pdf`](docs/pdf/1_PrivacyLens_Project_Record.pdf)
    (what was built and why) and [`docs/pdf/3_PrivacyLens_Weak_Points_and_Improvements.pdf`](docs/pdf/3_PrivacyLens_Weak_Points_and_Improvements.pdf)
    (what to improve, in a suggested order).
-2. **Before and after every change:** run `python -m pytest`. All 109 tests must pass, and none
+2. **Before and after every change:** run `python -m pytest`. All 122 tests must pass, and none
    should be skipped (a skip means the model is missing).
 3. **Changing the model or the rules:** tune only on the validation split and `data/synthetic/dev`,
    never on the test data. Re-run `scripts/04_evaluate.py` and record what you changed and why in
@@ -105,7 +112,9 @@ What is in the repository and what is not:
 |---|---|
 | Code, tests, configuration, documentation, figures, results | yes |
 | `models/privacylens-ner/` (trained model) | yes, weight file through Git LFS |
-| `data/processed/` (the 20,000 / 2,000 / 3,000 prepared documents, 33 MB) | yes |
+| `models/archive/`, `models/experiments/` (local copies of older and trial models) | no: older versions are in the Git history |
+| `data/processed/` (the 20,000 / 2,000 / 3,000 prepared documents, 33 MB, plus the 350 / 50 / 100 ORG supplement documents) | yes |
+| `data/extra/` (the team's 500 extra ORG documents, source file) | yes |
 | `data/synthetic/`, `data/gold/`, `data/samples/` | yes |
 | `reports/logs/` (logs of the training and evaluation runs) | yes |
 | `data/raw/` (original dataset, 300 MB) | no: re-download with `scripts/01_prepare_data.py` |
@@ -120,10 +129,15 @@ the repository, so steps 1 and 2 are only needed to rebuild them from scratch:
 
 ```bash
 python scripts/01_prepare_data.py        # download + validate + clean + explore + visualize + export  (~1 min)
-python scripts/02_train_model.py         # fine-tune the model                                         (~17 min on GPU)
+python scripts/02_train_model.py         # fine-tune the model (needs script 05 first, see below)       (~17 min on GPU)
 python scripts/03_make_synthetic_docs.py # fictional evaluation documents + sample files               (seconds)
 python scripts/04_evaluate.py            # metrics, figures and error-analysis tables                  (~3 min)
 ```
+
+The model in the repository (version 2) was also trained on the team's extra ORG documents.
+To rebuild that data, run `python scripts/05_prepare_org_supplement.py` after step 1 and before
+step 2. `python scripts/06_compare_models.py` compares two model folders on the same documents
+(see [`docs/DATASET_UPDATE.md`](docs/DATASET_UPDATE.md)).
 
 Then run the tests:
 
@@ -131,7 +145,7 @@ Then run the tests:
 pytest
 ```
 
-109 tests cover every module. Tests that need the trained model are skipped automatically if it is missing.
+122 tests cover every module. Tests that need the trained model are skipped automatically if it is missing.
 
 ---
 
@@ -210,16 +224,19 @@ PrivacyLens/
 │   ├── pipeline.py             scan(): the whole workflow in one function
 │   ├── visualization.py        all charts
 │   ├── data_preparation.py     dataset pipeline (8 workflow steps)
+│   ├── org_supplement.py       pipeline for the team's 500 extra ORG documents
 │   ├── train_ner.py            PyTorch training loop
 │   ├── evaluation.py           precision / recall / F1, character recall, error analysis
 │   └── synthetic_data.py       generator for fictional evaluation documents
-├── scripts/                    01_prepare_data, 02_train_model, 03_make_synthetic_docs, 04_evaluate
-├── tests/                      109 pytest tests
+├── scripts/                    01_prepare_data, 02_train_model, 03_make_synthetic_docs, 04_evaluate,
+│                               05_prepare_org_supplement, 06_compare_models, build_pdf_docs
+├── tests/                      122 pytest tests
 ├── data/
 │   ├── samples/                fictional sample files for the app
 │   ├── synthetic/              60 fictional evaluation documents (dev / test)
 │   ├── gold/                   gold labels for the synthetic documents
-│   ├── processed/              prepared dataset (created by script 01)
+│   ├── extra/                  the team's 500 extra ORG documents (source file)
+│   ├── processed/              prepared dataset (created by scripts 01 and 05)
 │   ├── raw/                    original dataset files (not committed, downloaded by script 01)
 ├── models/                     fine-tuned model (weights stored with Git LFS, created by script 02)
 ├── reports/
@@ -254,8 +271,10 @@ PrivacyLens/
 - **English only.** Arabic text is not analysed by the model (future work).
 - **No OCR.** Scanned PDFs and text inside images are not analysed; the app says so clearly.
 - **Organisations are the weakest category.** On our synthetic documents the model finds only about
-  62% of organisation names exactly (it misses or splits names such as "Al Waha Medical Center").
+  57% of organisation names exactly (it misses or splits names such as "Al Waha Medical Center").
   The training data labels *company* names; institutions like hospitals and academies look different.
+  The team's extra ORG documents (version 2) did not change this, because they contain only
+  company names in 20 sentence patterns.
 - **Training data is synthetic and US-centric.** Real documents can look different. In our tests
   Saudi-style names were recognised well, but this was measured only on generated documents.
 - **`ID_LIKE` is a pattern match.** It does not prove that a number is a real identifier.
@@ -270,6 +289,7 @@ PrivacyLens/
 | Resource | Use in this project | License |
 |---|---|---|
 | [nvidia/Nemotron-PII](https://huggingface.co/datasets/nvidia/Nemotron-PII) | Training, validation and test data | CC BY 4.0 |
+| The team's 500 ORG documents (`data/extra/`) | Extra training data for company names (350), validation (50), test (100) | Part of the project (fictional) |
 | [distilbert-base-cased](https://huggingface.co/distilbert/distilbert-base-cased) | Pretrained model that we fine-tuned | Apache 2.0 |
 | [dslim/distilbert-NER](https://huggingface.co/dslim/distilbert-NER) | Baseline for comparison and fallback model | Apache 2.0 |
 | PyTorch, Transformers, PyMuPDF, Streamlit, pandas, matplotlib, seaborn | Libraries | see each project |
@@ -288,9 +308,11 @@ PDF versions (built with `python scripts/build_pdf_docs.py`):
 - [`docs/pdf/1_PrivacyLens_Project_Record.pdf`](docs/pdf/1_PrivacyLens_Project_Record.pdf) - the complete record: overview, data sources, project log, code guide, model card
 - [`docs/pdf/2_PrivacyLens_How_To_Run.pdf`](docs/pdf/2_PrivacyLens_How_To_Run.pdf) - installing, starting and using the app, with screenshots
 - [`docs/pdf/3_PrivacyLens_Weak_Points_and_Improvements.pdf`](docs/pdf/3_PrivacyLens_Weak_Points_and_Improvements.pdf) - known limits and what to improve next
+- [`docs/pdf/4_PrivacyLens_Dataset_Update.pdf`](docs/pdf/4_PrivacyLens_Dataset_Update.pdf) - the team's extra ORG dataset: assessment, processing, retraining and results
 
 Markdown sources:
 
+- [`docs/DATASET_UPDATE.md`](docs/DATASET_UPDATE.md) - the extra ORG dataset and the model update (version 2)
 - [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md) - every dataset, model and library used, with licences and citations
 - [`docs/HOW_TO_RUN.md`](docs/HOW_TO_RUN.md) - how to run the app (on Windows you can also double-click `run_app.bat`)
 - [`docs/WEAK_POINTS_AND_IMPROVEMENTS.md`](docs/WEAK_POINTS_AND_IMPROVEMENTS.md) - weak points, tested examples and suggested improvements

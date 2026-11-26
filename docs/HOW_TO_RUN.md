@@ -40,8 +40,8 @@ Keep the black window open while you use the app. It is the program; the browser
 ## 2. On another computer
 
 This was tested on 16 November 2026 with a completely new environment on Windows 11:
-the installation took about 8 minutes, used about 1.3 GB of disk space, and all 109 tests passed
-without a graphics card. It was not tested on macOS or Linux.
+the installation took about 8 minutes, used about 1.3 GB of disk space, and all tests (109 at
+that time) passed without a graphics card. It was not tested on macOS or Linux.
 
 ### What you need
 
@@ -202,11 +202,13 @@ Run these from the project folder with the Python of your environment
 | Order | Command | What it does | Time |
 |---|---|---|---|
 | 1 | `python scripts/01_prepare_data.py` | Downloads the dataset (300 MB), checks, cleans, explores and exports it. Optional: the prepared data is already in the repository. | about 1 minute plus download |
-| 2 | `python scripts/02_train_model.py` | Trains the AI model. Optional: the trained model is already in the repository. | about 17 minutes on an RTX 3050 |
-| 3 | `python scripts/03_make_synthetic_docs.py` | Creates the fictional test documents and the sample files | seconds |
-| 4 | `python scripts/04_evaluate.py` | Calculates all results, charts and error tables | about 3 minutes |
-| 5 | `python -m pytest` | Runs the 109 automated tests | under 1 minute |
-| 6 | `python scripts/build_pdf_docs.py` | Rebuilds the three PDF documents in `docs/pdf` | seconds |
+| 2 | `python scripts/05_prepare_org_supplement.py` | Checks the team's 500 ORG documents, completes their labels and splits them by template. Optional: the prepared files are already in the repository. | seconds |
+| 3 | `python scripts/02_train_model.py` | Trains the AI model (Nemotron-PII + the team's documents). Optional: the trained model is already in the repository. Add `--output-dir models/experiments/<name>` to train a trial model without replacing the app's model. | about 17 minutes on an RTX 3050 |
+| 4 | `python scripts/03_make_synthetic_docs.py` | Creates the fictional test documents and the sample files | seconds |
+| 5 | `python scripts/04_evaluate.py` | Calculates all results, charts and error tables | about 3 minutes |
+| 6 | `python scripts/06_compare_models.py --stage validation --model old=<folder> --model new=<folder>` | Compares two trained models on validation data (to choose one); `--stage test` reports the test results once the choice is made | about 1 minute per model |
+| 7 | `python -m pytest` | Runs the 122 automated tests | under 1 minute |
+| 8 | `python scripts/build_pdf_docs.py` | Rebuilds the four PDF documents in `docs/pdf` | seconds |
 
 **Training needs a graphics card to be fast.** The normal installation gives the CPU version of
 PyTorch. For an NVIDIA card, install the GPU version first, then the rest:

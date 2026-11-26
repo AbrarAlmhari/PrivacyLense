@@ -1,0 +1,474 @@
+{
+  "stage": "validation",
+  "min_confidence": 0.5,
+  "models": {
+    "v1": {
+      "folder": "models/archive/privacylens-ner-v1",
+      "nemotron_validation": {
+        "documents": 2000,
+        "per_category": {
+          "PERSON": {
+            "precision": 0.9693,
+            "recall": 0.9658,
+            "f1": 0.9675,
+            "true_positives": 1326,
+            "false_positives": 42,
+            "false_negatives": 47,
+            "support": 1373
+          },
+          "ORG": {
+            "precision": 0.9432,
+            "recall": 0.9834,
+            "f1": 0.9629,
+            "true_positives": 1660,
+            "false_positives": 100,
+            "false_negatives": 28,
+            "support": 1688
+          },
+          "LOCATION": {
+            "precision": 0.9637,
+            "recall": 0.9691,
+            "f1": 0.9664,
+            "true_positives": 1539,
+            "false_positives": 58,
+            "false_negatives": 49,
+            "support": 1588
+          },
+          "ADDRESS": {
+            "precision": 0.9634,
+            "recall": 0.9753,
+            "f1": 0.9693,
+            "true_positives": 316,
+            "false_positives": 12,
+            "false_negatives": 8,
+            "support": 324
+          }
+        },
+        "overall": {
+          "precision": 0.958,
+          "recall": 0.9735,
+          "f1": 0.9657,
+          "true_positives": 4841,
+          "false_positives": 212,
+          "false_negatives": 132,
+          "support": 4973
+        },
+        "macro_f1": 0.9665
+      },
+      "org_supplement_validation": {
+        "documents": 50,
+        "per_category": {
+          "PERSON": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 50,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 50
+          },
+          "ORG": {
+            "precision": 0.8609,
+            "recall": 0.8667,
+            "f1": 0.8638,
+            "true_positives": 130,
+            "false_positives": 21,
+            "false_negatives": 20,
+            "support": 150
+          },
+          "LOCATION": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 25,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 25
+          },
+          "ADDRESS": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "true_positives": 0,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 0
+          }
+        },
+        "overall": {
+          "precision": 0.9071,
+          "recall": 0.9111,
+          "f1": 0.9091,
+          "true_positives": 205,
+          "false_positives": 21,
+          "false_negatives": 20,
+          "support": 225
+        },
+        "macro_f1": 0.9546
+      },
+      "synthetic_dev": {
+        "documents": 20,
+        "per_category": {
+          "PERSON": {
+            "precision": 0.9643,
+            "recall": 0.9818,
+            "f1": 0.973,
+            "true_positives": 54,
+            "false_positives": 2,
+            "false_negatives": 1,
+            "support": 55
+          },
+          "ORG": {
+            "precision": 0.9048,
+            "recall": 0.7917,
+            "f1": 0.8444,
+            "true_positives": 19,
+            "false_positives": 2,
+            "false_negatives": 5,
+            "support": 24
+          },
+          "LOCATION": {
+            "precision": 0.8947,
+            "recall": 0.8947,
+            "f1": 0.8947,
+            "true_positives": 17,
+            "false_positives": 2,
+            "false_negatives": 2,
+            "support": 19
+          },
+          "ADDRESS": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 9,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 9
+          }
+        },
+        "overall": {
+          "precision": 0.9429,
+          "recall": 0.9252,
+          "f1": 0.934,
+          "true_positives": 99,
+          "false_positives": 6,
+          "false_negatives": 8,
+          "support": 107
+        },
+        "macro_f1": 0.928
+      }
+    },
+    "v2_repeat1": {
+      "folder": "models/experiments/v2_repeat1",
+      "nemotron_validation": {
+        "documents": 2000,
+        "per_category": {
+          "PERSON": {
+            "precision": 0.9774,
+            "recall": 0.9752,
+            "f1": 0.9763,
+            "true_positives": 1339,
+            "false_positives": 31,
+            "false_negatives": 34,
+            "support": 1373
+          },
+          "ORG": {
+            "precision": 0.9438,
+            "recall": 0.9858,
+            "f1": 0.9644,
+            "true_positives": 1664,
+            "false_positives": 99,
+            "false_negatives": 24,
+            "support": 1688
+          },
+          "LOCATION": {
+            "precision": 0.9648,
+            "recall": 0.9654,
+            "f1": 0.9651,
+            "true_positives": 1533,
+            "false_positives": 56,
+            "false_negatives": 55,
+            "support": 1588
+          },
+          "ADDRESS": {
+            "precision": 0.9547,
+            "recall": 0.9753,
+            "f1": 0.9649,
+            "true_positives": 316,
+            "false_positives": 15,
+            "false_negatives": 8,
+            "support": 324
+          }
+        },
+        "overall": {
+          "precision": 0.9602,
+          "recall": 0.9757,
+          "f1": 0.9679,
+          "true_positives": 4852,
+          "false_positives": 201,
+          "false_negatives": 121,
+          "support": 4973
+        },
+        "macro_f1": 0.9677
+      },
+      "org_supplement_validation": {
+        "documents": 50,
+        "per_category": {
+          "PERSON": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 50,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 50
+          },
+          "ORG": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 150,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 150
+          },
+          "LOCATION": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 25,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 25
+          },
+          "ADDRESS": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "true_positives": 0,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 0
+          }
+        },
+        "overall": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 225,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "support": 225
+        },
+        "macro_f1": 1.0
+      },
+      "synthetic_dev": {
+        "documents": 20,
+        "per_category": {
+          "PERSON": {
+            "precision": 0.9821,
+            "recall": 1.0,
+            "f1": 0.991,
+            "true_positives": 55,
+            "false_positives": 1,
+            "false_negatives": 0,
+            "support": 55
+          },
+          "ORG": {
+            "precision": 0.95,
+            "recall": 0.7917,
+            "f1": 0.8636,
+            "true_positives": 19,
+            "false_positives": 1,
+            "false_negatives": 5,
+            "support": 24
+          },
+          "LOCATION": {
+            "precision": 0.9444,
+            "recall": 0.8947,
+            "f1": 0.9189,
+            "true_positives": 17,
+            "false_positives": 1,
+            "false_negatives": 2,
+            "support": 19
+          },
+          "ADDRESS": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 9,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 9
+          }
+        },
+        "overall": {
+          "precision": 0.9709,
+          "recall": 0.9346,
+          "f1": 0.9524,
+          "true_positives": 100,
+          "false_positives": 3,
+          "false_negatives": 7,
+          "support": 107
+        },
+        "macro_f1": 0.9434
+      }
+    },
+    "v2_repeat3": {
+      "folder": "models/experiments/v2_repeat3",
+      "nemotron_validation": {
+        "documents": 2000,
+        "per_category": {
+          "PERSON": {
+            "precision": 0.9714,
+            "recall": 0.9658,
+            "f1": 0.9686,
+            "true_positives": 1326,
+            "false_positives": 39,
+            "false_negatives": 47,
+            "support": 1373
+          },
+          "ORG": {
+            "precision": 0.944,
+            "recall": 0.9787,
+            "f1": 0.961,
+            "true_positives": 1652,
+            "false_positives": 98,
+            "false_negatives": 36,
+            "support": 1688
+          },
+          "LOCATION": {
+            "precision": 0.9679,
+            "recall": 0.9691,
+            "f1": 0.9685,
+            "true_positives": 1539,
+            "false_positives": 51,
+            "false_negatives": 49,
+            "support": 1588
+          },
+          "ADDRESS": {
+            "precision": 0.9576,
+            "recall": 0.9753,
+            "f1": 0.9664,
+            "true_positives": 316,
+            "false_positives": 14,
+            "false_negatives": 8,
+            "support": 324
+          }
+        },
+        "overall": {
+          "precision": 0.9599,
+          "recall": 0.9718,
+          "f1": 0.9658,
+          "true_positives": 4833,
+          "false_positives": 202,
+          "false_negatives": 140,
+          "support": 4973
+        },
+        "macro_f1": 0.9661
+      },
+      "org_supplement_validation": {
+        "documents": 50,
+        "per_category": {
+          "PERSON": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 50,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 50
+          },
+          "ORG": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 150,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 150
+          },
+          "LOCATION": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 25,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 25
+          },
+          "ADDRESS": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "true_positives": 0,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 0
+          }
+        },
+        "overall": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "true_positives": 225,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "support": 225
+        },
+        "macro_f1": 1.0
+      },
+      "synthetic_dev": {
+        "documents": 20,
+        "per_category": {
+          "PERSON": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 55,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 55
+          },
+          "ORG": {
+            "precision": 0.95,
+            "recall": 0.7917,
+            "f1": 0.8636,
+            "true_positives": 19,
+            "false_positives": 1,
+            "false_negatives": 5,
+            "support": 24
+          },
+          "LOCATION": {
+            "precision": 0.9,
+            "recall": 0.9474,
+            "f1": 0.9231,
+            "true_positives": 18,
+            "false_positives": 2,
+            "false_negatives": 1,
+            "support": 19
+          },
+          "ADDRESS": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "true_positives": 9,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "support": 9
+          }
+        },
+        "overall": {
+          "precision": 0.9712,
+          "recall": 0.9439,
+          "f1": 0.9573,
+          "true_positives": 101,
+          "false_positives": 3,
+          "false_negatives": 6,
+          "support": 107
+        },
+        "macro_f1": 0.9467
+      }
+    }
+  }
+}

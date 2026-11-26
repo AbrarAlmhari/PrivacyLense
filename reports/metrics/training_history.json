@@ -11,12 +11,17 @@
     "B-ADDRESS",
     "I-ADDRESS"
   ],
-  "trained_at": "2026-11-16T02:03:51",
-  "training_minutes": 16.86,
+  "trained_at": "2026-11-26T10:47:35",
+  "training_minutes": 16.06,
   "device": "NVIDIA GeForce RTX 3050",
-  "train_documents": 20000,
+  "train_documents": 20350,
+  "extra_train_files": [
+    "data/processed/org_supplement_train.jsonl"
+  ],
+  "extra_documents": 350,
+  "extra_train_repeat": 1,
   "validation_documents": 2000,
-  "train_windows": 31467,
+  "train_windows": 31817,
   "hyperparameters": {
     "max_length": 256,
     "stride": 32,
@@ -27,34 +32,34 @@
     "epochs": 3,
     "seed": 42
   },
-  "best_validation_f1": 0.9657,
+  "best_validation_f1": 0.9679,
   "history": [
     {
       "epoch": 1,
-      "train_loss": 0.05347,
-      "validation_loss": 0.00813,
-      "validation_precision": 0.9445,
-      "validation_recall": 0.9614,
-      "validation_f1": 0.9529,
-      "elapsed_minutes": 5.86
+      "train_loss": 0.05305,
+      "validation_loss": 0.0084,
+      "validation_precision": 0.9434,
+      "validation_recall": 0.9654,
+      "validation_f1": 0.9543,
+      "elapsed_minutes": 5.38
     },
     {
       "epoch": 2,
-      "train_loss": 0.00385,
-      "validation_loss": 0.00781,
-      "validation_precision": 0.9549,
-      "validation_recall": 0.9612,
-      "validation_f1": 0.958,
-      "elapsed_minutes": 11.46
+      "train_loss": 0.00378,
+      "validation_loss": 0.00724,
+      "validation_precision": 0.9562,
+      "validation_recall": 0.9737,
+      "validation_f1": 0.9648,
+      "elapsed_minutes": 10.7
     },
     {
       "epoch": 3,
-      "train_loss": 0.0019,
-      "validation_loss": 0.00775,
-      "validation_precision": 0.958,
-      "validation_recall": 0.9735,
-      "validation_f1": 0.9657,
-      "elapsed_minutes": 16.85
+      "train_loss": 0.00176,
+      "validation_loss": 0.00687,
+      "validation_precision": 0.9602,
+      "validation_recall": 0.9757,
+      "validation_f1": 0.9679,
+      "elapsed_minutes": 16.05
     }
   ],
   "versions": {

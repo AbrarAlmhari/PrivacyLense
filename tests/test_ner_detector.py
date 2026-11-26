@@ -98,3 +98,16 @@ def test_long_text_is_processed_in_windows():
     assert any(d.text == "Khalid Alghamdi" and d.category == "PERSON" for d in detections)
     last = detections[-1]
     assert text[last.start : last.end] == last.text
+
+
+@needs_model
+def test_scan_with_a_given_model_matches_the_normal_scan():
+    # scripts/06_compare_models.py passes a model to scan(); the result must be the same.
+    from src.file_processor import load_input
+    from src.ner_detector import load_ner_model
+    from src.pipeline import scan
+
+    loaded = load_input(text="Noura Alharbi from Acme Corporation lives in Riyadh. Call 0551234567.")
+    normal = scan(loaded)
+    given = scan(loaded, model=load_ner_model())
+    assert [(d.category, d.start, d.end) for d in given.detections] == [(d.category, d.start, d.end) for d in normal.detections]

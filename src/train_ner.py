@@ -29,7 +29,7 @@ from torch.utils.data import DataLoader, Dataset
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 
 from src.config import resolve_path
-from src.data_preparation import load_processed
+from src.data_preparation import DataError, load_processed
 from src.evaluation import evaluate_entities, spans_from_detections, spans_from_entities
 from src.ner_detector import LoadedModel, detect_with_model
 from src.schemas import NER_CATEGORIES
@@ -37,6 +37,7 @@ from src.schemas import NER_CATEGORIES
 logger = logging.getLogger(__name__)
 
 IGNORE_INDEX = -100  # PyTorch's loss function skips positions with this label
+DEFAULT_MODEL_DIR = "models/privacylens-ner"  # the folder the app loads
 
 
 def set_seed(seed: int) -> None:
@@ -192,6 +193,8 @@ def train(config: dict) -> dict:
     ).to(device)
 
     train_documents = load_processed("train", config)
+    extra_documents = load_extra_training_documents(config)
+    train_documents = train_documents + extra_documents * int(settings.get("extra_train_repeat", 1))
     validation_documents = load_processed("validation", config)
     max_length, stride = settings["max_length"], settings["stride"]
     train_windows = encode_documents(train_documents, tokenizer, label_to_id, max_length, stride)
@@ -277,6 +280,9 @@ def train(config: dict) -> dict:
         "training_minutes": round((time.time() - started) / 60, 2),
         "device": torch.cuda.get_device_name(0) if use_amp else "cpu",
         "train_documents": len(train_documents),
+        "extra_train_files": list(settings.get("extra_train_files") or []),
+        "extra_documents": len(extra_documents),
+        "extra_train_repeat": int(settings.get("extra_train_repeat", 1)),
         "validation_documents": len(validation_documents),
         "train_windows": len(train_windows),
         "hyperparameters": {key: settings[key] for key in ("max_length", "stride", "batch_size", "learning_rate", "weight_decay", "warmup_ratio", "epochs", "seed")},
@@ -289,8 +295,23 @@ def train(config: dict) -> dict:
         },
     }
     _write_json(output_dir / "training_info.json", training_info)
-    _write_json(resolve_path(config["evaluation"]["metrics_dir"]) / "training_history.json", training_info)
+    if output_dir == resolve_path(DEFAULT_MODEL_DIR):
+        # Only the model the app uses updates the report files (not experiments).
+        _write_json(resolve_path(config["evaluation"]["metrics_dir"]) / "training_history.json", training_info)
     return training_info
+
+
+def load_extra_training_documents(config: dict) -> list[dict]:
+    """Read the extra training files listed in ``model.extra_train_files``."""
+    documents: list[dict] = []
+    for name in config["model"].get("extra_train_files") or []:
+        path = resolve_path(name)
+        if not path.exists():
+            raise DataError(f"Extra training file not found: {path}. Run scripts/05_prepare_org_supplement.py first.")
+        with open(path, encoding="utf-8") as file:
+            documents.extend(json.loads(line) for line in file if line.strip())
+        logger.info("Extra training documents from %s: %d", path.name, len(documents))
+    return documents
 
 
 def _write_json(path: Path, content: dict) -> None:

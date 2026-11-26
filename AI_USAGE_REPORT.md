@@ -59,7 +59,8 @@ Inputs attached: Lectures 1-14 (PDF), `PrivacyLens_Project_Plan_v2.docx`, `ARTI3
 | 3 | 2026-11-16 | Give the record of the work, the explanation of everything done and the data sources as a PDF; create a PDF that explains how to run the app; list weak points and improvements in a separate file | `docs/DATA_SOURCES.md`, `docs/HOW_TO_RUN.md`, `docs/WEAK_POINTS_AND_IMPROVEMENTS.md`, `docs/PROJECT_RECORD.md`, the three PDFs in `docs/pdf/`, app screenshots in `reports/screenshots/`, `run_app.bat`, `scripts/build_pdf_docs.py`; a clean-installation test and hand tests of weak points | `TO COMPLETE` |
 | 4 | 2026-11-23 | "how can i push the folder to a new github repo" | Step-by-step Git commands and a check of what would be uploaded | `TO COMPLETE` |
 | 5 | 2026-11-24 | "ok make sure to push everything cuz my team will clone the repo and work after me" | Git repository with the model in Git LFS, cleaned copies of the run logs, team section in the README, updated run guide and documents, the Git commands and a check of the staged files; the commit and push were run by the team member | `TO COMPLETE` |
-| 6 | | | | |
+| 6 | 2026-11-26 | Check the extra dataset the team gathered (`train_with_org_augmented.jsonl`: our training split + 500 ORG documents), assess it, process it, train and test the model with it, report the changes, update the PDFs and make a new PDF about the update | Assessment of the file; `src/org_supplement.py`, `scripts/05_prepare_org_supplement.py`, `scripts/06_compare_models.py`, training options in `src/train_ner.py`; completed labels and a split by template; two trained candidates, choice on validation data, test results; `docs/DATASET_UPDATE.md`, updated documents and PDFs; 13 new tests | `TO COMPLETE` |
+| 7 | | | | |
 
 ---
 
@@ -74,6 +75,9 @@ All of these are explained with reasons in `docs/PROJECT_LOG.md`.
    (the plan asked for cross-labelling by members).
 5. Default confidence threshold 0.5; repeated names are propagated; everything is pre-selected for redaction.
 6. Library version pin `PyMuPDF==1.26.7` because of a redaction bug in version 2.1.
+7. For the team's ORG documents (26 November 2026): use only the 500 new rows of the received file
+   (keep our own 20,000 training documents); label the unlabelled person names and cities; split by
+   template; the selection rule for model version 2 and the tie-break between the two candidates.
 
 ---
 
@@ -83,8 +87,9 @@ All of these are explained with reasons in `docs/PROJECT_LOG.md`.
 
 | Check | Evidence | Result |
 |---|---|---|
-| Automated tests | `tests/` (109 tests), run with `pytest` | all pass |
-| Model quality | `scripts/04_evaluate.py` -> `reports/metrics/evaluation_results.json` | F1 0.956 on 3,000 unseen documents |
+| Automated tests | `tests/` (122 tests since 26 November 2026; 109 before), run with `pytest` | all pass |
+| Model quality | `scripts/04_evaluate.py` -> `reports/metrics/evaluation_results.json` | F1 0.961 on 3,000 unseen documents (model version 2; version 1: 0.956) |
+| Model version 2 chosen fairly | `scripts/06_compare_models.py` -> `reports/metrics/model_comparison_validation.json` and `_test.json`; rule written before the results (`docs/PROJECT_LOG.md`, Section 13.2) | chosen on validation data only; all test results reported, including the one that got worse (ORG on the synthetic documents) |
 | Comparison with a baseline | same file, `baseline_model` | baseline F1 0.687 |
 | App behaviour | manual run in the browser: sample PDF, empty input, both pages | works; two small issues fixed |
 | PDF redaction really removes text | `tests/test_pdf_redaction.py` and the in-app verification | passes |

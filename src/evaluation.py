@@ -14,7 +14,35 @@ A "span" is a tuple ``(category, start, end)``.
 
 from __future__ import annotations
 
+import json
+
+from src.config import resolve_path
+
 Span = tuple[str, int, int]
+
+
+def load_synthetic(split: str, config: dict) -> list[dict]:
+    """Read the synthetic documents of one split ("dev" or "test") with their gold labels."""
+    gold_dir = resolve_path(config["evaluation"]["gold_dir"])
+    synthetic_dir = resolve_path(config["evaluation"]["synthetic_dir"])
+    with open(gold_dir / "ner_gold.json", encoding="utf-8") as file:
+        ner_gold = json.load(file)
+    with open(gold_dir / "regex_gold.json", encoding="utf-8") as file:
+        regex_gold = json.load(file)
+
+    documents = []
+    for document_id, entry in ner_gold.items():
+        if entry["split"] != split:
+            continue
+        text = (synthetic_dir / split / f"{document_id}.txt").read_text(encoding="utf-8")
+        documents.append(
+            {
+                "id": document_id,
+                "text": text,
+                "entities": entry["entities"] + regex_gold[document_id]["entities"],
+            }
+        )
+    return documents
 
 
 def precision_recall_f1(true_positives: int, false_positives: int, false_negatives: int) -> dict:

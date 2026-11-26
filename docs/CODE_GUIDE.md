@@ -101,6 +101,8 @@ instead of a silent bug, which is what would happen with plain dictionaries.
   limitations. The matched strings are only included if `include_sensitive_text=True`.
 - `pipeline.scan(load_result)` runs regex -> NER -> merge -> propagate -> score and returns a
   `ScanResult`. The app, the tests and the evaluation all call this same function.
+  The optional argument `model=` lets `scripts/06_compare_models.py` run the same workflow with
+  another loaded model (for example the previous version), without changing the app's model.
 
 ## 9. `app.py` - the Streamlit interface
 
@@ -152,12 +154,43 @@ Follows the PyTorch lectures step by step:
 After each epoch the model is evaluated on the validation set with the same inference code the app
 uses (`detect_with_model`), and only the epoch with the best F1 is saved.
 
+Extra training data (version 2): `load_extra_training_documents` reads the files listed under
+`model.extra_train_files` in the config and adds them to the Nemotron training documents,
+`model.extra_train_repeat` times each. `scripts/02_train_model.py` has options for experiments:
+`--output-dir` (save somewhere else, so the app's model is not replaced), `--extra-repeat` and
+`--no-extra`. Only a run that saves to `models/privacylens-ner` updates
+`reports/metrics/training_history.json`.
+
+## 11b. `src/org_supplement.py` - the team's extra ORG documents
+
+The same workflow idea as `data_preparation.py`, for the 500 documents in
+`data/extra/org_supplement_raw.jsonl`, called in order by `run_pipeline`
+(script: `scripts/05_prepare_org_supplement.py`):
+
+| Function | What it does |
+|---|---|
+| `load_supplement` | reads the JSON Lines file |
+| `entity_problems` / `validate_supplement` | checks keys, offsets, labels, overlaps; counts duplicates and overlap with the Nemotron splits |
+| `clean` | drops duplicates, documents already in the Nemotron data, over-long texts |
+| `complete_labels` | adds `PERSON` and `LOCATION` labels for the names listed in the config (the source file labelled only `ORG`); a name inside a company name is left alone |
+| `split_by_template` | puts whole templates into train / validation / test with a fixed seed, so test sentences were never seen in training |
+| `family_overlap` | reports how many company-name families of validation/test also occur in training |
+| `export` | writes `data/processed/org_supplement_<split>.jsonl` |
+
+Why each step is needed is explained in `docs/DATASET_UPDATE.md`.
+
 ## 12. `src/evaluation.py` - metrics
 
 - `evaluate_entities`: strict entity-level precision / recall / F1 per category plus the
   micro-average ("overall"). A span is `(category, start, end)`; it is correct only if it is in the gold set.
 - `character_recall`: share of gold sensitive characters covered by any prediction.
 - `collect_errors`: builds the error-analysis rows (missed, false alarm, wrong boundary, wrong category).
+- `load_synthetic`: reads the synthetic documents of one split with their gold labels (used by
+  scripts 04 and 06).
+
+`scripts/06_compare_models.py` compares model folders in two separate stages: `--stage validation`
+(development data only, used to choose a model) and `--stage test` (held-out data, run once after
+the choice, only to report).
 
 ## 13. `src/synthetic_data.py` - fictional evaluation documents
 
@@ -174,7 +207,8 @@ gold label at the same time. The same slot number gives the same value (a name t
 |---|---|
 | `test_file_processor.py` | cleaning rules, index map, TXT/PDF loading, every error type (empty, unsupported, corrupt, too large, scanned, password) |
 | `test_regex_detector.py` | positive and negative cases for every rule, offsets, priority, Arabic-Indic digits |
-| `test_ner_detector.py` | BIO decoding without a model; with the model: names, places, long texts, clean text |
+| `test_ner_detector.py` | BIO decoding without a model; with the model: names, places, long texts, clean text, `scan(model=...)` gives the same result |
+| `test_org_supplement.py` | label completion (also a city inside a company name), validation errors, template split, the prepared files |
 | `test_risk_redaction.py` | scoring cases from the plan (empty, one item, repeats, caps, bands), merge, propagation, text redaction |
 | `test_pdf_redaction.py` | text really removed, neighbours kept, text does not move, metadata cleared, verification works |
 | `test_app_workflow.py` | end-to-end: load -> scan -> redact -> summary, synthetic generator, metrics |

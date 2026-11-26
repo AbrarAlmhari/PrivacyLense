@@ -47,6 +47,12 @@ DOCUMENTS = [
         "subtitle": "Known limits, how we know about them, and what to do next",
         "sources": ["WEAK_POINTS_AND_IMPROVEMENTS.md"],
     },
+    {
+        "output": "4_PrivacyLens_Dataset_Update.pdf",
+        "title": "PrivacyLens Dataset Update",
+        "subtitle": "The team's ORG documents: assessment, processing, retraining and results (model version 2)",
+        "sources": ["DATASET_UPDATE.md"],
+    },
 ]
 
 BROWSER_PATHS = [

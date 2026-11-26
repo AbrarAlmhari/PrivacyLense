@@ -1,0 +1,89 @@
+{
+  "source_file": "data/extra/org_supplement_raw.jsonl",
+  "validation": {
+    "documents": 500,
+    "invalid_documents": 0,
+    "duplicate_texts": 0,
+    "duplicate_uids": 0,
+    "same_text_as_a_nemotron_document": 0,
+    "same_uid_as_a_nemotron_document": 0,
+    "labels_in_source": {
+      "ORG": 1550
+    },
+    "longest_text_characters": 522
+  },
+  "cleaning": {
+    "rows_before": 500,
+    "rows_after": 500
+  },
+  "labels_before_completion": {
+    "ORG": 1550
+  },
+  "labels_after_completion": {
+    "ORG": 1550,
+    "LOCATION": 325,
+    "PERSON": 475
+  },
+  "splits": {
+    "train": {
+      "documents": 350,
+      "templates": [
+        "Business Email",
+        "Company Profile",
+        "Compliance Report",
+        "Email Signature",
+        "Legal Correspondence",
+        "Meeting Minutes",
+        "Organization Directory",
+        "Project Handover",
+        "Project Status Update",
+        "Purchase Order",
+        "Recruitment Announcement",
+        "Shipping Notice",
+        "Supplier Evaluation",
+        "Vendor Registration"
+      ],
+      "entities": {
+        "ORG": 1125,
+        "LOCATION": 250,
+        "PERSON": 375
+      }
+    },
+    "validation": {
+      "documents": 50,
+      "templates": [
+        "Customer Support Exchange",
+        "Service Agreement"
+      ],
+      "entities": {
+        "ORG": 150,
+        "PERSON": 50,
+        "LOCATION": 25
+      }
+    },
+    "test": {
+      "documents": 100,
+      "templates": [
+        "Business News Summary",
+        "Internal Memo",
+        "Invoice",
+        "Research Report"
+      ],
+      "entities": {
+        "PERSON": 50,
+        "ORG": 275,
+        "LOCATION": 50
+      }
+    }
+  },
+  "company_name_families": {
+    "validation": {
+      "families": 50,
+      "also_in_train": 50
+    },
+    "test": {
+      "families": 50,
+      "also_in_train": 50
+    }
+  }
+}

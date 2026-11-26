@@ -11,6 +11,10 @@ data/raw/
 
 # The trained model IS committed: models/privacylens-ner/model.safetensors
 # is stored with Git LFS (see .gitattributes).
+# Local copies of older models and training experiments are not
+# (older versions stay available in the Git history).
+models/archive/
+models/experiments/
 
 # Local app logs and outputs (never commit user documents).
 # The training and evaluation logs are kept in reports/logs/ instead.

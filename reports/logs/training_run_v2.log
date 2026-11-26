@@ -1,0 +1,72 @@
+2026-11-26 10:31:19,780 | INFO | src.train_ner | Training on NVIDIA GeForce RTX 3050
+
+[transformers] DistilBertForTokenClassification LOAD REPORT from: distilbert-base-cased
+Key                     | Status     | 
+------------------------+------------+-
+vocab_transform.bias    | UNEXPECTED | 
+vocab_layer_norm.bias   | UNEXPECTED | 
+vocab_transform.weight  | UNEXPECTED | 
+vocab_layer_norm.weight | UNEXPECTED | 
+vocab_projector.bias    | UNEXPECTED | 
+classifier.bias         | MISSING    | 
+classifier.weight       | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+2026-11-26 10:31:26,050 | INFO | src.train_ner | Extra training documents from org_supplement_train.jsonl: 350
+2026-11-26 10:31:31,850 | INFO | src.train_ner | Training windows: 31817, validation windows: 3184
+<project folder>\src\train_ner.py:248: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+2026-11-26 10:32:02,053 | INFO | src.train_ner | Epoch 1 step 200/1989 - loss 0.4374
+2026-11-26 10:32:30,607 | INFO | src.train_ner | Epoch 1 step 400/1989 - loss 0.2281
+2026-11-26 10:32:59,152 | INFO | src.train_ner | Epoch 1 step 600/1989 - loss 0.1567
+2026-11-26 10:33:28,809 | INFO | src.train_ner | Epoch 1 step 800/1989 - loss 0.1206
+2026-11-26 10:33:57,898 | INFO | src.train_ner | Epoch 1 step 1000/1989 - loss 0.0980
+2026-11-26 10:34:27,365 | INFO | src.train_ner | Epoch 1 step 1200/1989 - loss 0.0829
+2026-11-26 10:34:57,089 | INFO | src.train_ner | Epoch 1 step 1400/1989 - loss 0.0722
+2026-11-26 10:35:26,295 | INFO | src.train_ner | Epoch 1 step 1600/1989 - loss 0.0640
+2026-11-26 10:35:55,336 | INFO | src.train_ner | Epoch 1 step 1800/1989 - loss 0.0579
+2026-11-26 10:36:54,672 | INFO | src.train_ner | Epoch summary: {'epoch': 1, 'train_loss': 0.05305, 'validation_loss': 0.0084, 'validation_precision': 0.9434, 'validation_recall': 0.9654, 'validation_f1': 0.9543, 'elapsed_minutes': 5.38}
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.53it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.53it/s]
+2026-11-26 10:36:55,472 | INFO | src.train_ner | New best model saved to <project folder>\models\experiments\v2_repeat1 (F1 0.9543)
+2026-11-26 10:37:25,798 | INFO | src.train_ner | Epoch 2 step 200/1989 - loss 0.0038
+2026-11-26 10:37:55,951 | INFO | src.train_ner | Epoch 2 step 400/1989 - loss 0.0038
+2026-11-26 10:38:25,432 | INFO | src.train_ner | Epoch 2 step 600/1989 - loss 0.0035
+2026-11-26 10:38:54,052 | INFO | src.train_ner | Epoch 2 step 800/1989 - loss 0.0037
+2026-11-26 10:39:22,678 | INFO | src.train_ner | Epoch 2 step 1000/1989 - loss 0.0038
+2026-11-26 10:39:51,369 | INFO | src.train_ner | Epoch 2 step 1200/1989 - loss 0.0037
+2026-11-26 10:40:20,014 | INFO | src.train_ner | Epoch 2 step 1400/1989 - loss 0.0037
+2026-11-26 10:40:48,747 | INFO | src.train_ner | Epoch 2 step 1600/1989 - loss 0.0039
+2026-11-26 10:41:17,380 | INFO | src.train_ner | Epoch 2 step 1800/1989 - loss 0.0039
+2026-11-26 10:42:13,705 | INFO | src.train_ner | Epoch summary: {'epoch': 2, 'train_loss': 0.00378, 'validation_loss': 0.00724, 'validation_precision': 0.9562, 'validation_recall': 0.9737, 'validation_f1': 0.9648, 'elapsed_minutes': 10.7}
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  2.22it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  2.22it/s]
+2026-11-26 10:42:14,167 | INFO | src.train_ner | New best model saved to <project folder>\models\experiments\v2_repeat1 (F1 0.9648)
+2026-11-26 10:42:42,797 | INFO | src.train_ner | Epoch 3 step 200/1989 - loss 0.0021
+2026-11-26 10:43:11,407 | INFO | src.train_ner | Epoch 3 step 400/1989 - loss 0.0019
+2026-11-26 10:43:40,075 | INFO | src.train_ner | Epoch 3 step 600/1989 - loss 0.0018
+2026-11-26 10:44:08,700 | INFO | src.train_ner | Epoch 3 step 800/1989 - loss 0.0017
+2026-11-26 10:44:38,000 | INFO | src.train_ner | Epoch 3 step 1000/1989 - loss 0.0017
+2026-11-26 10:45:08,332 | INFO | src.train_ner | Epoch 3 step 1200/1989 - loss 0.0018
+2026-11-26 10:45:38,203 | INFO | src.train_ner | Epoch 3 step 1400/1989 - loss 0.0018
+2026-11-26 10:46:08,066 | INFO | src.train_ner | Epoch 3 step 1600/1989 - loss 0.0018
+2026-11-26 10:46:37,703 | INFO | src.train_ner | Epoch 3 step 1800/1989 - loss 0.0018
+2026-11-26 10:47:35,033 | INFO | src.train_ner | Epoch summary: {'epoch': 3, 'train_loss': 0.00176, 'validation_loss': 0.00687, 'validation_precision': 0.9602, 'validation_recall': 0.9757, 'validation_f1': 0.9679, 'elapsed_minutes': 16.05}
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  2.06it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  2.06it/s]
+2026-11-26 10:47:35,530 | INFO | src.train_ner | New best model saved to <project folder>\models\experiments\v2_repeat1 (F1 0.9679)
+
+=== Training finished ===
+{'epoch': 1, 'train_loss': 0.05305, 'validation_loss': 0.0084, 'validation_precision': 0.9434, 'validation_recall': 0.9654, 'validation_f1': 0.9543, 'elapsed_minutes': 5.38}
+{'epoch': 2, 'train_loss': 0.00378, 'validation_loss': 0.00724, 'validation_precision': 0.9562, 'validation_recall': 0.9737, 'validation_f1': 0.9648, 'elapsed_minutes': 10.7}
+{'epoch': 3, 'train_loss': 0.00176, 'validation_loss': 0.00687, 'validation_precision': 0.9602, 'validation_recall': 0.9757, 'validation_f1': 0.9679, 'elapsed_minutes': 16.05}
+Best validation F1: 0.9679
+Model saved in: models/experiments/v2_repeat1

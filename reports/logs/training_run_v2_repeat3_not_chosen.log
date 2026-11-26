@@ -1,0 +1,75 @@
+2026-11-26 10:47:47,222 | INFO | src.train_ner | Training on NVIDIA GeForce RTX 3050
+
+[transformers] DistilBertForTokenClassification LOAD REPORT from: distilbert-base-cased
+Key                     | Status     | 
+------------------------+------------+-
+vocab_projector.bias    | UNEXPECTED | 
+vocab_layer_norm.bias   | UNEXPECTED | 
+vocab_transform.weight  | UNEXPECTED | 
+vocab_transform.bias    | UNEXPECTED | 
+vocab_layer_norm.weight | UNEXPECTED | 
+classifier.weight       | MISSING    | 
+classifier.bias         | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+2026-11-26 10:47:54,125 | INFO | src.train_ner | Extra training documents from org_supplement_train.jsonl: 350
+2026-11-26 10:48:02,382 | INFO | src.train_ner | Training windows: 32517, validation windows: 3184
+<project folder>\src\train_ner.py:248: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+2026-11-26 10:49:05,828 | INFO | src.train_ner | Epoch 1 step 200/2033 - loss 0.4472
+2026-11-26 10:50:09,395 | INFO | src.train_ner | Epoch 1 step 400/2033 - loss 0.2328
+2026-11-26 10:50:39,065 | INFO | src.train_ner | Epoch 1 step 600/2033 - loss 0.1590
+2026-11-26 10:51:08,528 | INFO | src.train_ner | Epoch 1 step 800/2033 - loss 0.1223
+2026-11-26 10:51:39,569 | INFO | src.train_ner | Epoch 1 step 1000/2033 - loss 0.0999
+2026-11-26 10:52:10,075 | INFO | src.train_ner | Epoch 1 step 1200/2033 - loss 0.0848
+2026-11-26 10:52:40,760 | INFO | src.train_ner | Epoch 1 step 1400/2033 - loss 0.0736
+2026-11-26 10:53:11,154 | INFO | src.train_ner | Epoch 1 step 1600/2033 - loss 0.0653
+2026-11-26 10:53:41,349 | INFO | src.train_ner | Epoch 1 step 1800/2033 - loss 0.0588
+2026-11-26 10:54:11,548 | INFO | src.train_ner | Epoch 1 step 2000/2033 - loss 0.0538
+2026-11-26 10:54:48,011 | INFO | src.train_ner | Epoch summary: {'epoch': 1, 'train_loss': 0.05307, 'validation_loss': 0.00775, 'validation_precision': 0.944, 'validation_recall': 0.963, 'validation_f1': 0.9534, 'elapsed_minutes': 6.76}
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.54it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.54it/s]
+2026-11-26 10:54:48,673 | INFO | src.train_ner | New best model saved to <project folder>\models\experiments\v2_repeat3 (F1 0.9534)
+2026-11-26 10:55:18,856 | INFO | src.train_ner | Epoch 2 step 200/2033 - loss 0.0038
+2026-11-26 10:55:49,170 | INFO | src.train_ner | Epoch 2 step 400/2033 - loss 0.0035
+2026-11-26 10:56:19,501 | INFO | src.train_ner | Epoch 2 step 600/2033 - loss 0.0044
+2026-11-26 10:56:50,156 | INFO | src.train_ner | Epoch 2 step 800/2033 - loss 0.0043
+2026-11-26 10:57:20,921 | INFO | src.train_ner | Epoch 2 step 1000/2033 - loss 0.0042
+2026-11-26 10:57:51,537 | INFO | src.train_ner | Epoch 2 step 1200/2033 - loss 0.0040
+2026-11-26 10:58:22,323 | INFO | src.train_ner | Epoch 2 step 1400/2033 - loss 0.0040
+2026-11-26 10:58:53,063 | INFO | src.train_ner | Epoch 2 step 1600/2033 - loss 0.0038
+2026-11-26 10:59:23,580 | INFO | src.train_ner | Epoch 2 step 1800/2033 - loss 0.0038
+2026-11-26 10:59:53,312 | INFO | src.train_ner | Epoch 2 step 2000/2033 - loss 0.0037
+2026-11-26 11:00:30,806 | INFO | src.train_ner | Epoch summary: {'epoch': 2, 'train_loss': 0.00369, 'validation_loss': 0.00653, 'validation_precision': 0.96, 'validation_recall': 0.9696, 'validation_f1': 0.9648, 'elapsed_minutes': 12.47}
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  2.35it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  2.35it/s]
+2026-11-26 11:00:31,243 | INFO | src.train_ner | New best model saved to <project folder>\models\experiments\v2_repeat3 (F1 0.9648)
+2026-11-26 11:01:01,171 | INFO | src.train_ner | Epoch 3 step 200/2033 - loss 0.0016
+2026-11-26 11:01:31,165 | INFO | src.train_ner | Epoch 3 step 400/2033 - loss 0.0019
+2026-11-26 11:02:01,605 | INFO | src.train_ner | Epoch 3 step 600/2033 - loss 0.0018
+2026-11-26 11:02:32,224 | INFO | src.train_ner | Epoch 3 step 800/2033 - loss 0.0018
+2026-11-26 11:03:02,643 | INFO | src.train_ner | Epoch 3 step 1000/2033 - loss 0.0017
+2026-11-26 11:03:32,822 | INFO | src.train_ner | Epoch 3 step 1200/2033 - loss 0.0017
+2026-11-26 11:04:03,283 | INFO | src.train_ner | Epoch 3 step 1400/2033 - loss 0.0017
+2026-11-26 11:04:33,624 | INFO | src.train_ner | Epoch 3 step 1600/2033 - loss 0.0018
+2026-11-26 11:05:04,700 | INFO | src.train_ner | Epoch 3 step 1800/2033 - loss 0.0018
+2026-11-26 11:05:35,823 | INFO | src.train_ner | Epoch 3 step 2000/2033 - loss 0.0018
+2026-11-26 11:06:14,340 | INFO | src.train_ner | Epoch summary: {'epoch': 3, 'train_loss': 0.00177, 'validation_loss': 0.00721, 'validation_precision': 0.9599, 'validation_recall': 0.9718, 'validation_f1': 0.9658, 'elapsed_minutes': 18.2}
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.99it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.99it/s]
+2026-11-26 11:06:14,858 | INFO | src.train_ner | New best model saved to <project folder>\models\experiments\v2_repeat3 (F1 0.9658)
+
+=== Training finished ===
+{'epoch': 1, 'train_loss': 0.05307, 'validation_loss': 0.00775, 'validation_precision': 0.944, 'validation_recall': 0.963, 'validation_f1': 0.9534, 'elapsed_minutes': 6.76}
+{'epoch': 2, 'train_loss': 0.00369, 'validation_loss': 0.00653, 'validation_precision': 0.96, 'validation_recall': 0.9696, 'validation_f1': 0.9648, 'elapsed_minutes': 12.47}
+{'epoch': 3, 'train_loss': 0.00177, 'validation_loss': 0.00721, 'validation_precision': 0.9599, 'validation_recall': 0.9718, 'validation_f1': 0.9658, 'elapsed_minutes': 18.2}
+Best validation F1: 0.9658
+Model saved in: models/experiments/v2_repeat3

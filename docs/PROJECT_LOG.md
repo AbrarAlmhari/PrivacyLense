@@ -1,7 +1,9 @@
 # PrivacyLens - Project Log
 
 This file records **how the project was built, in order, and why each decision was made**.
-Read it top to bottom to follow the whole build. Dates: 16 November 2026 (one working session).
+Read it top to bottom to follow the whole build. Dates: 16 November 2026 (one working session),
+follow-up work on 24 and 26 November 2026 (Sections 12 and 13). Sections 1 to 10 describe
+version 1 of the model; the current model is version 2 (Section 13).
 
 Sources used for every decision:
 
@@ -318,4 +320,80 @@ Other changes in the same step:
   the Windows user name or the e-mail address.
 - The AI prepared the files and the commands; the team member ran `git init`, the commit and
   the push themselves.
+
+---
+
+## 13. The team's extra ORG dataset and model version 2 (26 November 2026)
+
+Requested: check the extra dataset the team gathered (`train_with_org_augmented.jsonl`), assess
+whether it is valid and useful, process it, use it to train and test the model, and report what
+changed. The full write-up is `docs/DATASET_UPDATE.md`; this section keeps the decisions in order.
+
+### 13.1 What the file contains
+
+| Finding | How it was found | Decision |
+|---|---|---|
+| 20,500 rows = our 20,000 prepared training documents + 500 new ones | Compared the `uid` of every row with `data/processed/train.jsonl` | Only the 500 new rows are new data |
+| 1,957 of the 20,000 old rows have a different text than ours under the same `uid` | Row-by-row comparison | Nemotron-PII stores every `uid` twice (a US and an international version of the same document). The file took the other version for these rows. All of them come from the dataset's training file, so there is **no leak into our test set**. We keep our own `train.jsonl`, because script 01 can rebuild it and because then the 500 new documents are the only difference between the old and the new model. |
+| The 500 new rows: valid offsets, no duplicates, no overlap with any Nemotron split or with our synthetic test documents | `scripts/05_prepare_org_supplement.py` (validation step) and a separate string check | Usable |
+| Only `ORG` is labelled; 475 person names and 325 city names in the same texts are not | Read one document of every template | Must be fixed: unlabelled names would teach the model that "Sarah Mitchell" is not a person |
+| 20 templates x 25 documents; inside a template only the company names change | Replaced the ORG names by a placeholder and counted different texts per template (1 each) | A random split would test on sentences seen in training, so the split is made by template |
+
+### 13.2 Rule for choosing the model, fixed before any result was seen
+
+Two candidates are trained with the normal settings (same seed, 3 epochs) on the Nemotron
+training documents plus the 350 supplement training documents: each supplement document used once
+(`v2_repeat1`) and three times (`v2_repeat3`). Version 1 is the current model.
+
+1. Only validation data is used for the choice: Nemotron validation (2,000), supplement validation
+   (50, two unseen templates) and synthetic dev (20).
+2. A candidate is allowed only if its overall F1 on Nemotron validation is at most 0.005 lower
+   than version 1's.
+3. Among allowed candidates, the one with the highest average ORG F1 on supplement validation and
+   synthetic dev is chosen.
+4. It replaces version 1 only if that average is higher than version 1's.
+5. The test sets are run once, after the choice, for version 1 and the chosen model, and all test
+   numbers are reported, whatever they show.
+
+### 13.3 Training and choice
+
+| Model | Training documents | Minutes | Nemotron validation F1 | ORG F1, supplement validation | ORG F1, synthetic dev | Average of the two ORG scores |
+|---|---|---|---|---|---|---|
+| v1 (current) | 20,000 | 16.9 | 0.9657 | 0.864 | 0.844 | 0.854 |
+| v2_repeat1 | 20,350 | 16.1 | 0.9679 | 1.000 | 0.864 | 0.932 |
+| v2_repeat3 | 21,050 | 18.2 | 0.9658 | 1.000 | 0.864 | 0.932 |
+
+Both candidates pass rule 2. They have exactly the same ORG average, which rule 3 did not foresee.
+The tie was broken, before any test set was run, with another validation number: the higher overall
+F1 on Nemotron validation, which chooses **v2_repeat1** (each supplement document used once; also
+the simpler setting). Its ORG average (0.932) is higher than version 1's (0.854), so it replaces
+version 1 (rule 4).
+
+### 13.4 Test results (run once, after the choice)
+
+| Test set | v1 | v2 |
+|---|---|---|
+| Nemotron test (3,000), AI model, overall F1 | 0.956 | 0.961 |
+| Nemotron test, ORG F1 | 0.915 | 0.925 |
+| Team's documents, 4 held-out templates (100), ORG F1 | 0.813 | 1.000 |
+| Synthetic test (40), complete pipeline, overall F1 | 0.949 | 0.950 |
+| Synthetic test, ORG F1 | 0.703 | 0.667 |
+| Synthetic test, share of sensitive characters covered | 94.5% | 93.7% |
+
+On the synthetic test documents version 2 misses "Harbor Point Bank" (two documents) and "Blue
+Falcon Logistics", which version 1 found, and finds one "Red Sea Analytics" that version 1 missed.
+This is reported, not fixed: changing anything because of test errors would make the test numbers
+meaningless. Institutions (university, hospital, medical center) are still missed by both versions.
+
+### 13.5 Other decisions in this step
+
+- Version 2 became the app's model (`models/privacylens-ner/`). Version 1 is kept locally in
+  `models/archive/` and in the Git history; its result files are in `reports/metrics/v1/`.
+- `scripts/04_evaluate.py` was run again, so `evaluation_results.json`, the error tables and
+  figures 06 to 11 now describe version 2.
+- Found on the way: 420 validation documents have their "sister" version in the training split
+  (Nemotron-PII has two versions of every `uid`, and script 01 splits by row). The test split is not
+  affected. Not changed now, so that version 1 and version 2 use the same data; recorded as a weak
+  point with its fix (split by `uid`).
+- 13 new tests; all 122 pass with version 2 and none is skipped.
 

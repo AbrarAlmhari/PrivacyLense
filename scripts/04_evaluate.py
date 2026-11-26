@@ -14,6 +14,9 @@ B. Synthetic documents (fictional letters, CVs, forms... from data/synthetic)
    4. development part: effect of the confidence threshold
    5. held-out test part: the COMPLETE pipeline (regex + AI + merge)
 
+C. The team's ORG documents (only if scripts/05_prepare_org_supplement.py was run)
+   6. our fine-tuned model on the 4 held-out templates (100 documents)
+
 Results go to reports/metrics/ and reports/figures/.
 """
 
@@ -30,6 +33,7 @@ from src.evaluation import (
     character_recall,
     collect_errors,
     evaluate_entities,
+    load_synthetic,
     spans_from_detections,
     spans_from_entities,
 )
@@ -107,28 +111,18 @@ def evaluate_public_test_set(config: dict) -> tuple[dict, list[dict]]:
     return results, errors
 
 
-def load_synthetic(split: str, config: dict) -> list[dict]:
-    """Read the synthetic documents of one split together with their gold labels."""
-    gold_dir = resolve_path(config["evaluation"]["gold_dir"])
-    synthetic_dir = resolve_path(config["evaluation"]["synthetic_dir"])
-    with open(gold_dir / "ner_gold.json", encoding="utf-8") as file:
-        ner_gold = json.load(file)
-    with open(gold_dir / "regex_gold.json", encoding="utf-8") as file:
-        regex_gold = json.load(file)
-
-    documents = []
-    for document_id, entry in ner_gold.items():
-        if entry["split"] != split:
-            continue
-        text = (synthetic_dir / split / f"{document_id}.txt").read_text(encoding="utf-8")
-        documents.append(
-            {
-                "id": document_id,
-                "text": text,
-                "entities": entry["entities"] + regex_gold[document_id]["entities"],
-            }
-        )
-    return documents
+def evaluate_org_supplement(config: dict) -> dict | None:
+    """Part C: the model on the held-out templates of the team's ORG documents."""
+    path = resolve_path(config["data"]["processed_dir"]) / "org_supplement_test.jsonl"
+    if not path.exists():
+        return None
+    with open(path, encoding="utf-8") as file:
+        documents = [json.loads(line) for line in file if line.strip()]
+    gold = [spans_from_entities(document["entities"]) for document in documents]
+    predicted = predict_documents(documents, load_ner_model(), config, float(config["ner"]["min_confidence"]))
+    scores = evaluate_entities(gold, predicted, NER_CATEGORIES)
+    scores["documents"] = len(documents)
+    return scores
 
 
 def evaluate_synthetic(config: dict) -> tuple[dict, list[dict]]:
@@ -226,9 +220,13 @@ def main() -> int:
 
     public, public_errors = evaluate_public_test_set(config)
     synthetic, synthetic_errors = evaluate_synthetic(config)
+    org_supplement = evaluate_org_supplement(config)
 
+    results = {"public_test_set": public, "synthetic_documents": synthetic}
+    if org_supplement is not None:
+        results["org_supplement_test_set"] = org_supplement
     with open(metrics_dir / "evaluation_results.json", "w", encoding="utf-8") as file:
-        json.dump({"public_test_set": public, "synthetic_documents": synthetic}, file, indent=2)
+        json.dump(results, file, indent=2)
     write_errors(metrics_dir / "error_analysis_public_test.csv", public_errors)
     write_errors(metrics_dir / "error_analysis_synthetic_test.csv", synthetic_errors)
     save_figures(public, synthetic, config)
@@ -241,6 +239,8 @@ def main() -> int:
     for row in synthetic["threshold_study_on_dev"]:
         print(f"  {row}")
     print_scores("B5. Complete pipeline, synthetic held-out test set", synthetic["full_pipeline_on_test"])
+    if org_supplement is not None:
+        print_scores(f"C6. Fine-tuned model, ORG supplement held-out templates ({org_supplement['documents']} docs)", org_supplement)
     print(f"\nErrors listed: {len(public_errors)} (public sample), {len(synthetic_errors)} (synthetic test)")
     print("Details: reports/metrics/evaluation_results.json, figures in reports/figures/")
     return 0

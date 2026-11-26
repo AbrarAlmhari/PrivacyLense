@@ -15,7 +15,7 @@ import time
 from dataclasses import dataclass, field
 
 from src.config import load_config
-from src.ner_detector import detect_ner, load_ner_model
+from src.ner_detector import LoadedModel, detect_ner, detect_with_model, load_ner_model
 from src.regex_detector import detect_regex
 from src.risk_analyzer import merge_detections, propagate_detections, score
 from src.schemas import Detection, LoadResult, RiskResult
@@ -35,13 +35,19 @@ class ScanResult:
     seconds: float = 0.0
 
 
-def scan(load_result: LoadResult, config: dict | None = None, use_ner: bool = True) -> ScanResult:
+def scan(
+    load_result: LoadResult,
+    config: dict | None = None,
+    use_ner: bool = True,
+    model: LoadedModel | None = None,
+) -> ScanResult:
     """Detect sensitive information in a loaded document and score the risk.
 
     Args:
         load_result: Output of ``file_processor.load_input``.
         config: Optional configuration dictionary.
         use_ner: Set to False to run the regex layer only (used in tests).
+        model: Use this loaded model instead of the app's model (used to compare models).
 
     Raises:
         ModelNotAvailableError: if ``use_ner`` is True and no model can be loaded.
@@ -55,7 +61,16 @@ def scan(load_result: LoadResult, config: dict | None = None, use_ner: bool = Tr
 
     ner_detections: list[Detection] = []
     model_name, used_fallback = "", False
-    if use_ner:
+    if use_ner and model is not None:
+        model_name, used_fallback = model.name, model.is_fallback
+        ner_detections = detect_with_model(
+            text,
+            model,
+            min_confidence=float(config["ner"]["min_confidence"]),
+            stride=int(config["model"]["stride"]),
+            batch_size=int(config["ner"]["inference_batch_size"]),
+        )
+    elif use_ner:
         loaded = load_ner_model()
         model_name, used_fallback = loaded.name, loaded.is_fallback
         ner_detections = detect_ner(text, config)

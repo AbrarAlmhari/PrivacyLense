@@ -73,6 +73,12 @@ English only; only inserted values are labelled.
 names, phone numbers and IDs. 20 are a development set, 40 a held-out test set. Gold labels are
 created by the generator. *(See Figure: `reports/figures/01_dataset_label_distribution.png`, `02_category_distribution.png`.)*
 
+**The team's ORG documents:** 500 fictional business documents (20 templates, 10 domains) written by
+the team to improve company-name detection, which is the model's weakest category. Only company
+names were labelled; the 475 person names and 325 cities in them were labelled by our pipeline
+(`scripts/05_prepare_org_supplement.py`). They are split by template: 350 for training,
+50 for validation, 100 for testing. `TO COMPLETE`: who wrote them and how.
+
 **Ethics:** no real personal or confidential document was used at any point. The app processes
 files locally in memory and never logs their content.
 
@@ -86,7 +92,7 @@ files locally in memory and never logs their content.
   `report_generator`, `pipeline`, `visualization`; training side: `data_preparation`, `train_ner`, `evaluation`.
 - **Configuration:** `config/config.yaml` holds limits, label mapping, hyperparameters, risk weights.
 - **Engineering practices:** custom exception classes, logging without sensitive text, type hints,
-  docstrings, 109 pytest tests, pinned requirements, fixed random seeds.
+  docstrings, 122 pytest tests, pinned requirements, fixed random seeds.
 
 ## 7. Data processing workflow
 
@@ -116,8 +122,15 @@ clean (canonical text), explore and visualize (statistics and charts in the app)
 us. Pretraining gives it general knowledge of English; fine-tuning teaches it our four categories.
 
 **Training:** plain PyTorch loop (custom Dataset, DataLoader, AdamW, linear warm-up/decay, mixed
-precision), 3 epochs, 16.9 minutes on an RTX 3050. The best epoch by validation F1 is saved.
+precision), 3 epochs, about 16 minutes on an RTX 3050. The best epoch by validation F1 is saved.
 *(Figure: `06_training_history.png`.)*
+
+**Model versions.** Version 1 (16 November) was trained on 20,000 Nemotron-PII documents. Version 2
+(26 November, the model in the app) adds 350 business documents with company names written by the
+team. Before use, these documents were checked, their missing person and city labels were added,
+and they were split by template so that the test documents use unseen sentences. Two training
+settings were compared, and the choice was made on validation data only with a rule fixed in
+advance (details: `docs/DATASET_UPDATE.md`).
 
 **Rule layer:** 12 regular-expression rules, each documented and tested separately, with extra
 validators (Luhn checksum, digit counts) and priority ordering.
@@ -129,15 +142,17 @@ validators (Luhn checksum, digit counts) and priority ordering.
 Metric: strict entity-level precision, recall and F1 (category and both boundaries must match),
 plus character-level recall.
 
-**9.1 AI model, 3,000 unseen public documents** *(Figure: `07_test_scores_by_category.png`)*
+All numbers are for model version 2; version 1 is given for comparison.
 
-| Category | Precision | Recall | F1 |
-|---|---|---|---|
-| PERSON | 0.981 | 0.983 | 0.982 |
-| ORG | 0.905 | 0.926 | 0.915 |
-| LOCATION | 0.940 | 0.960 | 0.950 |
-| ADDRESS | 0.969 | 0.973 | 0.971 |
-| Overall | 0.951 | 0.962 | 0.956 |
+**9.1 AI model, 3,000 unseen public documents** *(Figures: `07_test_scores_by_category.png`, `13_v1_v2_public_test.png`)*
+
+| Category | Precision | Recall | F1 | F1 of v1 |
+|---|---|---|---|---|
+| PERSON | 0.983 | 0.981 | 0.982 | 0.982 |
+| ORG | 0.910 | 0.942 | 0.925 | 0.915 |
+| LOCATION | 0.949 | 0.959 | 0.954 | 0.950 |
+| ADDRESS | 0.979 | 0.985 | 0.982 | 0.971 |
+| Overall | 0.955 | 0.966 | 0.961 | 0.956 |
 
 **9.2 Does training help?** The off-the-shelf model `dslim/distilbert-NER` reaches F1 0.687 on the
 same documents (PERSON 0.782, ORG 0.529, LOCATION 0.733) and has no address category. Part of this gap is a difference in labelling conventions: the baseline was trained on news text (CoNLL-2003 style labels) and marks many names that the PII dataset does not label, which lowers its precision here. *(Figure: `08_model_comparison.png`.)*
@@ -155,26 +170,34 @@ same documents (PERSON 0.782, ORG 0.529, LOCATION 0.733) and has no address cate
 | CREDIT_CARD | 1.000 | 1.000 | 1.000 | 7 |
 | IBAN | 1.000 | 1.000 | 1.000 | 9 |
 | PERSON | 1.000 | 0.990 | 0.995 | 98 |
-| ORG | 0.812 | 0.619 | 0.703 | 42 |
-| LOCATION | 0.844 | 1.000 | 0.916 | 38 |
+| ORG | 0.800 | 0.571 | 0.667 | 42 |
+| LOCATION | 0.905 | 1.000 | 0.950 | 38 |
 | ADDRESS | 1.000 | 1.000 | 1.000 | 17 |
-| Overall | 0.956 | 0.943 | 0.949 | 297 |
+| Overall | 0.965 | 0.936 | 0.950 | 297 |
 
-Character-level recall: 94.5%.
+Character-level recall: 93.7%. Version 1: overall F1 0.949, ORG F1 0.703, character recall 94.5%.
+Version 2 finds two fewer organisation mentions here (24 of 42) but makes fewer false alarms.
 
 Note on fairness: the rules were tuned on the validation split and the development documents.
 Two rule bugs were later found in the error table of the synthetic test set and fixed; before these
-two fixes the synthetic test scores were PHONE 0.923, CREDIT_CARD 0.933, overall 0.939.
+two fixes the synthetic test scores (with version 1) were PHONE 0.923, CREDIT_CARD 0.933, overall 0.939.
+
+**9.4b The team's ORG documents, 100 documents from 4 held-out templates**
+*(Figure: `14_v1_v2_org_supplement_test.png`)*: ORG F1 1.000 (version 1: 0.813). Optimistic, because
+the documents are regular business forms and the first words of the company names occur in training.
 
 **9.5 Error analysis** (full table: `reports/metrics/error_analysis_synthetic_test.csv`)
 
 | Example | Expected | Predicted | Reason |
 |---|---|---|---|
 | "...records at Al Waha Medical Center" | ORG | LOCATION "Al" / "Al Waha" | Looks like a place name; training data has company names, few institutions |
-| "Intern at Red Sea Analytics (2022)" | ORG | nothing | Organisation built from a geographic name |
-| "Software Engineer at Oasis Travel Agency" | ORG (3 words) | ORG "Oasis" | Boundary too short |
+| "Intern at Red Sea Analytics (2022)" | ORG | ORG "Analytics" | Organisation built from a geographic name; boundary too short |
+| "did you send the form to Eastern Dunes Academy?" | ORG | nothing | Institution ("Academy"), in a chat message |
+| "Software Engineer at Oasis Travel Agency" | ORG | nothing (version 1: ORG "Oasis") | Agency name; version 2 finds it in some sentences, not here |
 | "Billed to: Abdulrahman Mansour / Company: ..." | PERSON | ORG | Invoice layout: the "billed to" field is usually a company in the training data |
-| "EXPERIENCE" (CV heading) | nothing | LOCATION | Upper-case heading after a city name |
+
+The examples are version 2's errors. Version 1 also marked the CV heading "EXPERIENCE" as a place;
+version 2 no longer does.
 
 **9.6 Confidence threshold.** On the development set, F1 is highest at 0.7, but recall is the same
 from 0.3 to 0.7. The default is 0.5 because for redaction a missed item is worse than a false alarm
@@ -189,7 +212,8 @@ with charts, (4) review and PDF before/after preview, (5) export with the verifi
 ## 11. Limitations
 
 - English only; no OCR for scanned PDFs or images.
-- Organisation names are the weakest category (F1 0.70 on our synthetic documents).
+- Organisation names are the weakest category (F1 0.67 on our synthetic documents; the team's
+  extra company-name documents did not fix institutions such as academies and medical centers).
 - Training and evaluation data are synthetic; performance on real documents is not measured.
 - The synthetic test set is small (40 documents from 14 templates).
 - `ID_LIKE` is a pattern match and does not prove a number is a real identifier.
